@@ -32,6 +32,10 @@ RUN set -eux; \
 		opcache \
 		zip \
 	;
+	
+# Install symfony CLI (https://symfony.com/download)
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
+RUN apt install symfony-cli -y
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
