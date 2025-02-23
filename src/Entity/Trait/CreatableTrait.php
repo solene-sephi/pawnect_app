@@ -2,19 +2,21 @@
 
 namespace App\Entity\Trait;
 
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\SecurityBundle\Security;
 
 /**
  * Warning : add #[HasLifecycleCallbacks] annotation for each entity implementing this trait
  */
-trait TimestampableTrait
+trait CreatableTrait
 {
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
-
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $createdBy = null;
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -28,14 +30,14 @@ trait TimestampableTrait
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getCreatedBy(): ?User
     {
-        return $this->updated_at;
+        return $this->createdBy;
     }
 
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
+    public function setCreatedBy(?User $createdBy): static
     {
-        $this->updatedAt = $updatedAt;
+        $this->createdBy = $createdBy;
 
         return $this;
     }
@@ -47,9 +49,14 @@ trait TimestampableTrait
         $this->setUpdatedAtValue();
     }
 
-    #[ORM\PreUpdate]
-    public function setUpdatedAtValue(): void
+    #[ORM\PrePersist]
+    public function setCreatedByValue(Security $security): void
     {
-        $this->updatedAt = new \DateTimeImmutable();
+        if (!$this->createdBy) {
+            $user = $security->getUser();
+            if ($user instanceof User) {
+                $this->createdBy = $user;
+            }
+        }
     }
 }
