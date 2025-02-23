@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\FosterFamilyRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\FosterFamilyRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: FosterFamilyRepository::class)]
 #[ORM\Table(name: '`foster_family`')]
@@ -40,12 +40,26 @@ class FosterFamily
     /**
      * @var Collection<int, FosterRegistry>
      */
-    #[ORM\ManyToMany(targetEntity: FosterRegistry::class, mappedBy: 'FosterFamily')]
+    #[ORM\ManyToMany(targetEntity: FosterRegistry::class, mappedBy: 'fosterFamilies')]
     private Collection $fosterRegistries;
+
+    /**
+     * @var Collection<int, FosterAnimalOffer>
+     */
+    #[ORM\OneToMany(targetEntity: FosterAnimalOffer::class, mappedBy: 'fosterFamily', orphanRemoval: true)]
+    private Collection $fosterAnimalOffers;
+
+    /**
+     * @var Collection<int, AnimalFosterPlacement>
+     */
+    #[ORM\OneToMany(targetEntity: AnimalFosterPlacement::class, mappedBy: 'fosterFamily', orphanRemoval: true)]
+    private Collection $animalFosterPlacements;
 
     public function __construct()
     {
         $this->fosterRegistries = new ArrayCollection();
+        $this->fosterAnimalOffers = new ArrayCollection();
+        $this->animalFosterPlacements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,6 +161,66 @@ class FosterFamily
     {
         if ($this->fosterRegistries->removeElement($fosterRegistry)) {
             $fosterRegistry->removeFosterFamily($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FosterAnimalOffer>
+     */
+    public function getFosterAnimalOffers(): Collection
+    {
+        return $this->fosterAnimalOffers;
+    }
+
+    public function addFosterAnimalOffer(FosterAnimalOffer $fosterAnimalOffer): static
+    {
+        if (!$this->fosterAnimalOffers->contains($fosterAnimalOffer)) {
+            $this->fosterAnimalOffers->add($fosterAnimalOffer);
+            $fosterAnimalOffer->setFosterFamily($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFosterAnimalOffer(FosterAnimalOffer $fosterAnimalOffer): static
+    {
+        if ($this->fosterAnimalOffers->removeElement($fosterAnimalOffer)) {
+            // set the owning side to null (unless already changed)
+            if ($fosterAnimalOffer->getFosterFamily() === $this) {
+                $fosterAnimalOffer->setFosterFamily(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AnimalFosterPlacement>
+     */
+    public function getAnimalFosterPlacements(): Collection
+    {
+        return $this->animalFosterPlacements;
+    }
+
+    public function addAnimalFosterPlacement(AnimalFosterPlacement $animalFosterPlacement): static
+    {
+        if (!$this->animalFosterPlacements->contains($animalFosterPlacement)) {
+            $this->animalFosterPlacements->add($animalFosterPlacement);
+            $animalFosterPlacement->setFosterFamily($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimalFosterPlacement(AnimalFosterPlacement $animalFosterPlacement): static
+    {
+        if ($this->animalFosterPlacements->removeElement($animalFosterPlacement)) {
+            // set the owning side to null (unless already changed)
+            if ($animalFosterPlacement->getFosterFamily() === $this) {
+                $animalFosterPlacement->setFosterFamily(null);
+            }
         }
 
         return $this;

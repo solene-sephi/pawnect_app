@@ -64,14 +64,32 @@ class Shelter
     /**
      * @var Collection<int, FosterRegistry>
      */
-    #[ORM\ManyToMany(targetEntity: FosterRegistry::class, mappedBy: 'shelter')]
+    #[ORM\ManyToMany(targetEntity: FosterRegistry::class, mappedBy: 'shelters')]
     private Collection $fosterRegistries;
+
+    /**
+     * @var Collection<int, FosterAnimalOffer>
+     */
+    #[ORM\OneToMany(targetEntity: FosterAnimalOffer::class, mappedBy: 'shelter', orphanRemoval: true)]
+    private Collection $fosterAnimalOffers;
+
+    #[ORM\OneToOne(inversedBy: 'shelter', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Address $address = null;
+
+    /**
+     * @var Collection<int, AnimalArrival>
+     */
+    #[ORM\OneToMany(targetEntity: AnimalArrival::class, mappedBy: 'shelter', orphanRemoval: true)]
+    private Collection $animalArrivals;
 
     public function __construct()
     {
         $this->shelterEmployees = new ArrayCollection();
         $this->animals = new ArrayCollection();
         $this->fosterRegistries = new ArrayCollection();
+        $this->fosterAnimalOffers = new ArrayCollection();
+        $this->animalArrivals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -250,6 +268,78 @@ class Shelter
     {
         if ($this->fosterRegistries->removeElement($fosterRegistry)) {
             $fosterRegistry->removeShelter($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FosterAnimalOffer>
+     */
+    public function getFosterAnimalOffers(): Collection
+    {
+        return $this->fosterAnimalOffers;
+    }
+
+    public function addFosterAnimalOffer(FosterAnimalOffer $fosterAnimalOffer): static
+    {
+        if (!$this->fosterAnimalOffers->contains($fosterAnimalOffer)) {
+            $this->fosterAnimalOffers->add($fosterAnimalOffer);
+            $fosterAnimalOffer->setShelter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFosterAnimalOffer(FosterAnimalOffer $fosterAnimalOffer): static
+    {
+        if ($this->fosterAnimalOffers->removeElement($fosterAnimalOffer)) {
+            // set the owning side to null (unless already changed)
+            if ($fosterAnimalOffer->getShelter() === $this) {
+                $fosterAnimalOffer->setShelter(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(Address $address): static
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AnimalArrival>
+     */
+    public function getAnimalArrivals(): Collection
+    {
+        return $this->animalArrivals;
+    }
+
+    public function addAnimalArrival(AnimalArrival $animalArrival): static
+    {
+        if (!$this->animalArrivals->contains($animalArrival)) {
+            $this->animalArrivals->add($animalArrival);
+            $animalArrival->setShelter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimalArrival(AnimalArrival $animalArrival): static
+    {
+        if ($this->animalArrivals->removeElement($animalArrival)) {
+            // set the owning side to null (unless already changed)
+            if ($animalArrival->getShelter() === $this) {
+                $animalArrival->setShelter(null);
+            }
         }
 
         return $this;

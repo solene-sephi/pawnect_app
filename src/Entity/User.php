@@ -57,11 +57,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $lastLogin = null;
 
-    #[ORM\OneToOne(mappedBy: 'employee', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'employeeUser', cascade: ['persist', 'remove'])]
     private ?ShelterEmployee $shelterEmployee = null;
 
     #[ORM\OneToOne(mappedBy: 'fosterUser', cascade: ['persist', 'remove'])]
     private ?FosterFamily $fosterFamily = null;
+
+    #[ORM\OneToOne(inversedBy: 'residentUser', cascade: ['persist', 'remove'])]
+    private ?Address $address = null;
+
+    /**
+     * @var Collection<int, AdoptionRequest>
+     */
+    #[ORM\OneToMany(targetEntity: AdoptionRequest::class, mappedBy: 'requester', orphanRemoval: true)]
+    private Collection $adoptionRequests;
+
+    public function __construct()
+    {
+        $this->adoptionRequests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -216,6 +230,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->fosterFamily = $fosterFamily;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): static
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AdoptionRequest>
+     */
+    public function getAdoptionRequests(): Collection
+    {
+        return $this->adoptionRequests;
+    }
+
+    public function addAdoptionRequest(AdoptionRequest $adoptionRequest): static
+    {
+        if (!$this->adoptionRequests->contains($adoptionRequest)) {
+            $this->adoptionRequests->add($adoptionRequest);
+            $adoptionRequest->setRequester($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdoptionRequest(AdoptionRequest $adoptionRequest): static
+    {
+        if ($this->adoptionRequests->removeElement($adoptionRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($adoptionRequest->getRequester() === $this) {
+                $adoptionRequest->setRequester(null);
+            }
+        }
 
         return $this;
     }

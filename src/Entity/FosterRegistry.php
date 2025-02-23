@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Enum\GeneralStatusEnum;
 use App\Repository\FosterRegistryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,6 +10,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FosterRegistryRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+
 class FosterRegistry
 {
     #[ORM\Id]
@@ -20,21 +23,24 @@ class FosterRegistry
      * @var Collection<int, Shelter>
      */
     #[ORM\ManyToMany(targetEntity: Shelter::class, inversedBy: 'fosterRegistries')]
-    private Collection $shelter;
+    private Collection $shelters;
 
     /**
      * @var Collection<int, FosterFamily>
      */
     #[ORM\ManyToMany(targetEntity: FosterFamily::class, inversedBy: 'fosterRegistries')]
-    private Collection $FosterFamily;
+    private Collection $fosterFamilies;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
 
+    #[ORM\Column(enumType: GeneralStatusEnum::class)]
+    private ?GeneralStatusEnum $status = null;
+
     public function __construct()
     {
-        $this->shelter = new ArrayCollection();
-        $this->FosterFamily = new ArrayCollection();
+        $this->shelters = new ArrayCollection();
+        $this->fosterFamily = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,13 +77,13 @@ class FosterRegistry
      */
     public function getFosterFamily(): Collection
     {
-        return $this->FosterFamily;
+        return $this->fosterFamily;
     }
 
     public function addFosterFamily(FosterFamily $fosterFamily): static
     {
-        if (!$this->FosterFamily->contains($fosterFamily)) {
-            $this->FosterFamily->add($fosterFamily);
+        if (!$this->fosterFamily->contains($fosterFamily)) {
+            $this->fosterFamily->add($fosterFamily);
         }
 
         return $this;
@@ -85,7 +91,7 @@ class FosterRegistry
 
     public function removeFosterFamily(FosterFamily $fosterFamily): static
     {
-        $this->FosterFamily->removeElement($fosterFamily);
+        $this->fosterFamily->removeElement($fosterFamily);
 
         return $this;
     }
@@ -98,6 +104,18 @@ class FosterRegistry
     public function setComment(?string $comment): static
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getStatus(): ?GeneralStatusEnum
+    {
+        return $this->status;
+    }
+
+    public function setStatus(GeneralStatusEnum $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
