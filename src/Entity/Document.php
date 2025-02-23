@@ -35,8 +35,8 @@ class Document
     #[ORM\ManyToOne(inversedBy: 'documents')]
     private ?ShelterApproval $shelterApproval = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'documents')]
-    // private ?AdoptionRequest $adoptionRequest = null;
+    #[ORM\ManyToOne(inversedBy: 'documents')]
+    private ?AdoptionRequest $adoptionRequest = null;
 
     public function getId(): ?int
     {

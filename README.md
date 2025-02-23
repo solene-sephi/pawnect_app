@@ -97,17 +97,7 @@ docker compose exec database psql -U app -d pawnect_db
 
 If you can access the database, the setup is correct. Type `\q` to exit.
 
-#### 7. Using Symfony Console
-
-Symfony CLI should be installed in the container for correct environment variable handling. Instead of php bin/console, always use:
-
-```
-symfony console doctrine:database:create
-```
-
-This ensures the `DATABASE_URL` variable is correctly read from `.env.local`.
-
-#### 8. Running Migrations
+#### 7. Running Migrations
 
 After setting up the database, apply migrations:
 
@@ -117,7 +107,7 @@ symfony console doctrine:migrations:migrate
 
 This will create the necessary tables for your project.
 
-#### 10. Running the Project
+#### 9. Running the Project
 
 The application should now be accessible in the browser at:
 
