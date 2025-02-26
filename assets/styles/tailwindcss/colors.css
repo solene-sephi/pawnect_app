@@ -1,0 +1,46 @@
+@theme {
+    --color-*: initial;
+
+    /* === Neutrals === */
+    --color-black: #000;
+    --color-white: #fff;
+
+    /* === (vert) Primary === */
+    --color-primary-50: #f6f7f7;
+    --color-primary-100: #e0e7e2;
+    --color-primary-200: #c1cec5;
+    --color-primary-300: #9bada2;
+    --color-primary-400: #768b7f;
+    --color-primary-500: #5a6f63;
+    --color-primary-600: #485950;
+    --color-primary-700: #3c4942;
+    --color-primary-800: #323d37;
+    --color-primary-900: #2d3431;
+    --color-primary-950: #171c1a;
+
+    /* === (violet) Secondary === */
+    --color-secondary-50: #f7f7fb;
+    --color-secondary-100: #f1eff8;
+    --color-secondary-200: #e5e2f2;
+    --color-secondary-300: #d1cbe7;
+    --color-secondary-400: #b8add8;
+    --color-secondary-500: #9d8bc7;
+    --color-secondary-600: #9179ba;
+    --color-secondary-700: #795ea3;
+    --color-secondary-800: #654f88;
+    --color-secondary-900: #544270;
+    --color-secondary-950: #362a4b;
+
+    /* === (marron) Tertiary === */
+    --color-tertiary-50: #f5f4f1;
+    --color-tertiary-100: #e6e2db;
+    --color-tertiary-200: #cec7ba;
+    --color-tertiary-300: #b2a492;
+    --color-tertiary-400: #a3927f;
+    --color-tertiary-500: #8c7966;
+    --color-tertiary-600: #786456;
+    --color-tertiary-700: #614f47;
+    --color-tertiary-800: #54443f;
+    --color-tertiary-900: #4a3c39;
+    --color-tertiary-950: #29201f;
+}

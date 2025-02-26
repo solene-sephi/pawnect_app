@@ -1,0 +1,4 @@
+/* https://isotropic.co/tool/hex-color-to-css-filter/ */
+.filter-white {
+    filter: invert(100%) sepia(19%) saturate(0%) hue-rotate(212deg) brightness(110%) contrast(101%);
+}
