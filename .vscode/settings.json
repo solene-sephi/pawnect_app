@@ -1,0 +1,5 @@
+{
+  "workbench.editor.enablePreview": true,
+  "css.customData": [".vscode/tailwind.json"],
+  "css.lint.unknownAtRules": "ignore"
+}
