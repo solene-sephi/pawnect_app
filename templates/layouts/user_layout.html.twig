@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/base_layout.html.twig' %}
 
 {% block body %}
   {% block header %}
-    {% include '/main/includes/header.html.twig' %}
+    {% include 'components/user/_user_header.html.twig' %}
   {% endblock %}
   {% block content %}
 

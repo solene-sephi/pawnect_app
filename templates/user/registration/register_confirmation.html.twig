@@ -1,4 +1,4 @@
-{% extends 'main/registration/base.html.twig' %}
+{% extends 'layouts/auth_layout.html.twig' %}
 
 {% block content %}
   <h1 class="text-xl font-bold leading-tight tracking-tight text-secondary-800 md:text-2xl">Thank you for registering !</h1>
@@ -22,6 +22,6 @@
     </li>
   </ol>
   <div class="flex items-center justify-center">
-    <a href="#" class="btn btn-tertiary">Back to login</a>
+    <a href="{{ path('app_login') }}" class="btn btn-tertiary">Back to login</a>
   </div>
 {% endblock %}
