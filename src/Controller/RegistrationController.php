@@ -44,16 +44,16 @@ class RegistrationController extends AbstractController
                 'app_verify_email',
                 $user,
                 (new TemplatedEmail())
-                    ->from(new Address('test@test.test', 'Test'))
+                    ->from(new Address($this->getParameter('app.mail_from_address'), $this->getParameter('app.site.name')))
                     ->to((string) $user->getEmail())
                     ->subject('Please Confirm your Email')
-                    ->htmlTemplate('main/registration/confirmation_email.html.twig')
+                    ->htmlTemplate('user/registration/confirmation_email.html.twig')
             );
 
             return $this->redirectToRoute('app_register_confirmation');
         }
 
-        return $this->render('main/registration/register.html.twig', [
+        return $this->render('user/registration/register.html.twig', [
             'registrationForm' => $form,
         ]);
     }
@@ -84,16 +84,14 @@ class RegistrationController extends AbstractController
 
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_main');
-        // TODO :
-        // return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('app_login');
 
     }
 
     #[Route('/register/confirmation', name: 'app_register_confirmation')]
     public function registerConfirmation(Request $request): Response
     {
-        return $this->render('main/registration/register_confirmation.html.twig');
+        return $this->render('user/registration/register_confirmation.html.twig');
 
     }
 }

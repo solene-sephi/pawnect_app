@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/base_layout.html.twig' %}
 
 {% block body %}
   <section class="bg-tertiary-100">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
       <div class="w-full bg-white rounded-sm shadow md:mt-0 sm:max-w-md xl:p-0">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-10">
-          <a href="{{ path('app_main') }}" class="flex items-center justify-center mb-6"><img class="w-65 md:max-w-50 filter-tertiary" src="{{ asset('images/logo.svg') }}" alt="Pawnect Logo" /></a>
+          <a href="{{ path('app_main') }}" class="flex items-center justify-center mb-6"><img class="w-65 md:max-w-50 filter-tertiary" src="{{ asset('images/logo.svg') }}" alt="{{ site_name }} Logo" /></a>
           {% block content %}
 
           {% endblock %}
