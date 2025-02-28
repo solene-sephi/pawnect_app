@@ -1,8 +1,9 @@
 @import "tailwindcss";
 @import "./tailwindcss/tailwindcss.css";
 
-@import "./filters.css";
+@import "./utilities.css";
 
+@import "./components/_filters.css";
 @import "./components/_buttons.css";
 @import "./components/_flash.css";
 @import "./components/_typo.css";

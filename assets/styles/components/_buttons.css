@@ -7,7 +7,7 @@
 }
 
 .btn-primary {
-    @apply text-primary-50 bg-primary-900 hover:bg-primary-800 focus:ring-primary-800
+    @apply text-white bg-primary-900 hover:bg-primary-800 focus:ring-primary-800
 }
 
 .btn-outline-primary {

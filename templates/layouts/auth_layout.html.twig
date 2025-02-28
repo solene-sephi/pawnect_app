@@ -6,6 +6,15 @@
       <div class="w-full bg-white rounded-sm shadow md:mt-0 sm:max-w-md xl:p-0">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-10">
           <a href="{{ path('app_main') }}" class="flex items-center justify-center mb-6"><img class="w-65 md:max-w-50 filter-tertiary" src="{{ asset('images/logo.svg') }}" alt="{{ site_name }} Logo" /></a>
+
+          {% block page_title %}
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-secondary-800 md:text-2xl">
+              {% block page_title_text %}
+
+              {% endblock %}
+            </h1>
+          {% endblock %}
+
           {% block content %}
 
           {% endblock %}
