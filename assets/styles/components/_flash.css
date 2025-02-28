@@ -1,0 +1,35 @@
+.flash {
+    @apply fixed top-10 right-0 left-0 z-40 mx-10 my-8 flex items-center p-4 mb-4 rounded-sm
+}
+
+.flash.hidden {
+    @apply hidden
+}
+
+.flash button {
+    @apply ms-auto mx-1.5 -my-1.5 text-inherit rounded-lg focus:ring-2 p-1.5 inline-flex items-center justify-center h-8 w-8
+}
+
+.flash-success {
+    @apply bg-green-100 text-green-700 border border-green-700
+}
+
+.flash-success button {
+    @apply hover:bg-green-300
+}
+
+.flash-error {
+    @apply bg-red-100 text-red-700 border border-red-700
+}
+
+.flash-error button {
+    @apply hover:bg-red-300
+}
+
+.flash-warning {
+    background-color: orange;
+}
+
+.flash-info {
+    background-color: blue;
+}

@@ -1,12 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <div class="mt-15">
-    {% block header %}
-      {% include '/main/includes/header.html.twig' %}
-    {% endblock %}
-    {% block content %}
+  {% block header %}
+    {% include '/main/includes/header.html.twig' %}
+  {% endblock %}
+  {% block content %}
 
-    {% endblock %}
-  </div>
+  {% endblock %}
 {% endblock %}

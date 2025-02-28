@@ -5,7 +5,7 @@
     --color-black: #000;
     --color-white: #fff;
 
-    /* === (vert) Primary === */
+    /* === (green) Primary === */
     --color-primary-50: #f6f7f7;
     --color-primary-100: #e0e7e2;
     --color-primary-200: #c1cec5;
@@ -18,7 +18,7 @@
     --color-primary-900: #2d3431;
     --color-primary-950: #171c1a;
 
-    /* === (violet) Secondary === */
+    /* === (purple) Secondary === */
     --color-secondary-50: #f7f7fb;
     --color-secondary-100: #f1eff8;
     --color-secondary-200: #e5e2f2;
@@ -31,7 +31,7 @@
     --color-secondary-900: #544270;
     --color-secondary-950: #362a4b;
 
-    /* === (marron) Tertiary === */
+    /* === (brown) Tertiary === */
     --color-tertiary-50: #f5f4f1;
     --color-tertiary-100: #e6e2db;
     --color-tertiary-200: #cec7ba;
@@ -43,4 +43,36 @@
     --color-tertiary-800: #54443f;
     --color-tertiary-900: #4a3c39;
     --color-tertiary-950: #29201f;
+
+    /* === Red === */
+    --color-red-50: #fef2f2;
+    --color-red-100: #fde3e3;
+    --color-red-200: #fccccc;
+    --color-red-300: #f9a8a8;
+    --color-red-400: #f37676;
+    --color-red-500: #e84b4b;
+    --color-red-600: #d52d2d;
+    --color-red-700: #b22222;
+    --color-red-800: #942020;
+    --color-red-900: #7b2121;
+    --color-red-950: #430c0c;
+
+    /* === Green === */
+    --color-green-50: #effaf4;
+    --color-green-100: #d8f3e2;
+    --color-green-200: #b5e5ca;
+    --color-green-300: #84d1ab;
+    --color-green-400: #52b788;
+    --color-green-500: #2e9b6c;
+    --color-green-600: #1f7c56;
+    --color-green-700: #196347;
+    --color-green-800: #164f39;
+    --color-green-900: #134130;
+    --color-green-950: #0a241b;
+}
+
+@layer base {
+    html {
+        @apply text-primary-900 dark:text-tertiary-50;
+    }
 }
