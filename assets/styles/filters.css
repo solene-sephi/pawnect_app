@@ -2,3 +2,15 @@
 .filter-white {
     filter: invert(100%) sepia(19%) saturate(0%) hue-rotate(212deg) brightness(110%) contrast(101%);
 }
+
+.filter-primary {
+    filter: invert(43%) sepia(17%) saturate(355%) hue-rotate(93deg) brightness(91%) contrast(91%);
+}
+
+.filter-secondary {
+    filter: invert(57%) sepia(11%) saturate(1180%) hue-rotate(217deg) brightness(101%) contrast(91%);
+}
+
+.filter-tertiary {
+    filter: invert(25%) sepia(3%) saturate(3287%) hue-rotate(327deg) brightness(97%) contrast(88%);
+}

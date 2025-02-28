@@ -1,0 +1,16 @@
+{% block flashes %}
+  <div class="relative">
+    {% for label, messages in app.flashes %}
+      {% for id, message in messages %}
+        <div id="alert-{{ label }}-{{ id }}" class="flash flash-{{ label }}" role="alert">
+          <span class="sr-only">{{ label }}</span>
+          <div class="ms-3 text-sm font-medium">{{ message }}</div>
+          <button type="button" data-dismiss-target="#alert-{{ label }}-{{ id }}" aria-label="Close">
+            <span class="sr-only">Close</span>
+            {{ ux_icon('material-symbols:close-rounded') }}
+          </button>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+{% endblock %}
