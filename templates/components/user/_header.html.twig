@@ -1,0 +1,19 @@
+<header class="w-full">
+  <nav class="bg-primary-600 px-4 lg:px-6 py-2.5">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        {% include 'components/user/_menu_drawer.html.twig' %}
+      </div>
+      <div class="flex flex-wrap items-center">
+        <a href="{{ path('app_main') }}" class="text-white flex items-center"><img src="{{ asset('images/logo.svg') }}" class="h-6 mr-3 filter-white" alt="{{ site_name }} Logo" /></a>
+      </div>
+      <div class="flex items-center">
+        {% if app.user %}
+          {% include 'components/user/_account_drawer.html.twig' %}
+        {% else %}
+          <a href="{{ path('app_login') }}" class="btn btn-tertiary">Se connecter</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,6 +1,10 @@
 twig:
   file_name_pattern: "*.twig"
   form_themes: ["form/default.html.twig"]
+
+  globals:
+    site_name: "%app.site.name%"
+
 when@test:
   twig:
     strict_variables: true

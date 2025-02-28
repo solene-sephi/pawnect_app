@@ -1,12 +1,10 @@
 {% extends 'layouts/auth_layout.html.twig' %}
 
+{% block page_title_text %}
+  Create an account
+{% endblock %}
+
 {% block content %}
-  {% for flash_error in app.flashes('verify_email_error') %}
-    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-  {% endfor %}
-
-  <h1 class="text-xl font-bold leading-tight tracking-tight text-secondary-800 md:text-2xl dark:text-white">Create an account</h1>
-
   {{ form_start(registrationForm) }}
   <form class="space-y-4 md:space-y-6" action="{{ path('app_register') }}">
     {{ form_row(registrationForm._token) }}
