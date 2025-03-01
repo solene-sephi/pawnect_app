@@ -25,7 +25,7 @@
       <label for="password" class="block mb-2 text-sm font-medium text-tertiary-800 dark:text-white required">Password</label>
       <input type="password" name="_password" id="password" class="text-tertiary-800 bg-white rounded-sm text-sm block w-full p-2.5 border border-tertiary-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-tertiary-700 dark:border-tertiary-600 dark:text-white dark:placeholder-tertiary-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" autocomplete="current-password" required />
     </div>
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+    <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
 
     {#
             Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
