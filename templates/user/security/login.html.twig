@@ -7,15 +7,16 @@
 {% block content %}
 
     {% if error %}
-{% include "components/_alert.html.twig" with {'error': error, 'type': 'alert'} %}
+      {% include "components/_alert.html.twig" with {'error': error, 'type': 'alert'} %}
     {% endif %}
 
   <form method="post">
-    {% if app.user %}
+  {# TODO #}
+    {# {% if app.user %}
       <div class="mb-3">
         You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
       </div>
-    {% endif %}
+    {% endif %} #}
 
     <div class="mb-3">
       <label for="username" class="block mb-2 text-sm font-medium text-tertiary-800 dark:text-white required">Email</label>
