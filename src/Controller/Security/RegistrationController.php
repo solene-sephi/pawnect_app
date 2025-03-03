@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Security;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
@@ -47,13 +47,13 @@ class RegistrationController extends AbstractController
                     ->from(new Address($this->getParameter('app.mail_from_address'), $this->getParameter('app.site.name')))
                     ->to((string) $user->getEmail())
                     ->subject('Please Confirm your Email')
-                    ->htmlTemplate('user/registration/confirmation_email.html.twig')
+                    ->htmlTemplate('security/registration/confirmation_email.html.twig')
             );
 
             return $this->redirectToRoute('app_register_confirmation');
         }
 
-        return $this->render('user/registration/register.html.twig', [
+        return $this->render('security/registration/register.html.twig', [
             'registrationForm' => $form,
         ]);
     }
@@ -91,7 +91,7 @@ class RegistrationController extends AbstractController
     #[Route('/register/confirmation', name: 'app_register_confirmation')]
     public function registerConfirmation(Request $request): Response
     {
-        return $this->render('user/registration/register_confirmation.html.twig');
+        return $this->render('security/registration/register_confirmation.html.twig');
 
     }
 }
