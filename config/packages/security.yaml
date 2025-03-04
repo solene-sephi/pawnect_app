@@ -20,7 +20,6 @@ security:
         login_path: app_login
         check_path: app_login
         enable_csrf: true
-        success_handler: App\Security\Authentication\AuthenticationSuccessHandler
       logout:
         path: app_logout
         target: app_main
@@ -34,22 +33,11 @@ security:
       # https://symfony.com/doc/current/security/impersonating_user.html
       # switch_user: true
 
-  role_hierarchy:
-    ROLE_USER: []
-    ROLE_FOSTER:
-    ROLE_SHELTER_EMPLOYEE: ROLE_USER
-    ROLE_SHELTER_ADMIN: ROLE_SHELTER_EMPLOYEE
-    ROLE_ADMIN: []
-    ROLE_SUPER_ADMIN: ROLE_ADMIN
   # Easy way to control access for large sections of your site
   # Note: Only the *first* access control that matches will be used
   access_control:
-    - { path: ^/profile, roles: ROLE_USER }
-    - {
-        path: ^/shelter-admin,
-        roles: [ROLE_SHELTER_EMPLOYEE, ROLE_SHELTER_ADMIN],
-      }
-    - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+    # - { path: ^/admin, roles: ROLE_ADMIN }
+    # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
   security:
