@@ -45,10 +45,7 @@ security:
   # Note: Only the *first* access control that matches will be used
   access_control:
     - { path: ^/profile, roles: ROLE_USER }
-    - {
-        path: ^/shelter-admin,
-        roles: [ROLE_SHELTER_EMPLOYEE, ROLE_SHELTER_ADMIN],
-      }
+    - { path: ^/shelter, roles: [ROLE_SHELTER_EMPLOYEE, ROLE_SHELTER_ADMIN] }
     - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
 
 when@test:
