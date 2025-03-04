@@ -2,7 +2,7 @@
 
 namespace App\Security\Authentication;
 
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,15 +17,14 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
 
     public function __construct(
         private Security $security,
-        private RouterInterface $router
+        private Router $router
     ) {
     }
 
-    // TODO : vérifier
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): Response
     {
         if ($this->security->isGranted('ROLE_SHELTER_EMPLOYEE') || $this->security->isGranted('ROLE_SHELTER_ADMIN')) {
-            return new RedirectResponse($this->router->generate('app_shelter_dashboard'));
+            return new RedirectResponse($this->router->generate('app_admin_shelter_dashboard'));
         }
 
         // Redirect classic users to the previous page
@@ -40,6 +39,6 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
             }
         }
 
-        return new RedirectResponse($this->router->generate('app_home'));
+        return new RedirectResponse($this->router->generate('app_main'));
     }
 }
