@@ -1,0 +1,20 @@
+<header class="w-full">
+  <nav class="px-4 lg:px-6 py-2.5">
+    <div class="flex items-center justify-start md:justify-between">
+      <div class="mr-3 md:mr-0">
+        {% include 'components/shelter/_menu_drawer.html.twig' %}
+      </div>
+
+      {# Mobile menu #}
+      <div class="min-md:hidden flex items-center md:order-3 max-md:grow max-md:justify-end">
+        {% include 'components/shelter/_account_drawer.html.twig' %}
+      </div>
+
+      {# Desktop menu #}
+      <div class="max-md:hidden md:flex space-x-6 md:order-2">
+        <a href="#" class="hover:underline">{{ ux_icon('ri:message-3-line') }}</a>
+        <a href="{{ path('app_logout') }}" class="hover:underline">{{ ux_icon('hugeicons:logout-04') }}</a>
+      </div>
+    </div>
+  </nav>
+</header>
