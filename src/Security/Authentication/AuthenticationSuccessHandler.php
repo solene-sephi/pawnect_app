@@ -21,7 +21,6 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
     ) {
     }
 
-    // TODO : vérifier
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): Response
     {
         if ($this->security->isGranted('ROLE_SHELTER_EMPLOYEE') || $this->security->isGranted('ROLE_SHELTER_ADMIN')) {
