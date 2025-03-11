@@ -5,17 +5,19 @@
 </button>
 
 <!-- drawer component -->
-{% set menuItems = [{ icon: ux_icon('ic:round-dashboard'), name: 'Dashboard', route: 'app_shelter_dashboard' }, { icon: ux_icon('maki:animal-shelter'), name: 'Animals', route: 'app_shelter_dashboard' }] %}
-
 <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
   <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-    <div class="p-2 pt-0">
+    <div class="px-2 pb-4 pt-0">
       <img src="{{ asset('images/logo.svg') }}" class="h-3 filter-primary" alt="{{ site_name }} Logo" />
     </div>
-    <p class="p-2 border-y border-gray-200 dark:border-gray-700">TODO: Shelter name</p>
-    <ul class="space-y-2">
-      {% for item in menuItems %}
-        {% include 'components/shelter/_dashboard_sidebar_links.html.twig' with {'linkItem': item} %}
+    <ul class="space-y-2 text-sm">
+      {% for item in this.menuItems %}
+        <li>
+          <a href="{{ path(item.route) }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <twig:ux:icon name="{{ item.icon }}" />
+            <span class="ms-3">{{ item.name }}</span>
+          </a>
+        </li>
       {% endfor %}
     </ul>
   </div>

@@ -2,12 +2,12 @@
   <nav class="px-4 lg:px-6 py-2.5">
     <div class="flex items-center justify-start md:justify-between">
       <div class="mr-3 md:mr-0">
-        {% include 'components/shelter/_menu_drawer.html.twig' %}
+        <twig:Shelter:AsideMenu />
       </div>
 
       {# Mobile menu #}
       <div class="min-md:hidden flex items-center md:order-3 max-md:grow max-md:justify-end">
-        {% include 'components/shelter/_account_drawer.html.twig' %}
+        <twig:Shelter:AccountDrawer />
       </div>
 
       {# Desktop menu #}
