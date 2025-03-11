@@ -14,6 +14,11 @@ final class ShelterDashboardController extends AbstractController
     #[Route('/shelter/dashboard', name: 'app_shelter_dashboard')]
     public function index(): Response
     {
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        $shelter = $user->getShelterEmployee()->getShelter()->getName();
+        dump($user);
+        die;
         return $this->render('shelter/index.html.twig');
     }
 }
