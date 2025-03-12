@@ -30,7 +30,7 @@ trait TimestampableTrait
 
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static

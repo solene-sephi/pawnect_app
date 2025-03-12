@@ -6,7 +6,7 @@
 
 <!-- drawer component -->
 <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-  <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+  <div class="h-full px-3 py-4 overflow-y-auto bg-tertiary-50 border-r border-tertiary-300 dark:bg-gray-800">
     <div class="px-2 pb-4 pt-0">
       <img src="{{ asset('images/logo.svg') }}" class="h-3 filter-primary" alt="{{ site_name }} Logo" />
     </div>
@@ -37,3 +37,6 @@
     </ul>
   </div>
 </aside>
+
+{# Copy and paste of the background backdrop, because otherwise, when it's added to the DOM, the classes aren't recognized, since with Tailwind, only the classes actually used are loaded. #}
+<div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-30 hidden"></div>
