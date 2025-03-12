@@ -1,5 +1,5 @@
 <!-- drawer init and toggle -->
-<button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+<button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-sm sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
   <span class="sr-only">Open sidebar</span>
   {{ ux_icon('stash:burger-classic') }}
 </button>
@@ -10,13 +10,28 @@
     <div class="px-2 pb-4 pt-0">
       <img src="{{ asset('images/logo.svg') }}" class="h-3 filter-primary" alt="{{ site_name }} Logo" />
     </div>
-    <ul class="space-y-2 text-sm">
+    <ul class="text-sm">
       {% for item in this.menuItems %}
         <li>
-          <a href="{{ path(item.route) }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <twig:ux:icon name="{{ item.icon }}" />
-            <span class="ms-3">{{ item.name }}</span>
-          </a>
+          {% if item.submenus is defined %}
+            <button type="button" class="dropdown-arrow-icon-btn flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-sm group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="{{ item.name }}-dropdown" data-collapse-toggle="{{ item.name }}-dropdown">
+              <twig:ux:icon name="{{ item.icon }}" />
+              <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">{{ item.name }}</span>
+              <twig:ux:icon name="iconamoon:arrow-down-2-duotone" class="w-5 h-5 dropdown-arrow-icon" />
+            </button>
+            <ul id="{{ item.name }}-dropdown" class="hidden">
+              {% for subItem in item.submenus %}
+                <li>
+                  <a href="{{ path(subItem.route) }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-sm pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ subItem.name }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <a href="{{ path(item.route) }}" class="flex items-center p-2 text-gray-900 rounded-sm dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <twig:ux:icon name="{{ item.icon }}" />
+              <span class="ms-3">{{ item.name }}</span>
+            </a>
+          {% endif %}
         </li>
       {% endfor %}
     </ul>
