@@ -1,0 +1,9 @@
+{% extends 'shelter/layout.html.twig' %}
+
+{% block page_title_text %}
+  Edit Shelter
+{% endblock %}
+
+{% block content %}
+  {{ include('shelter/shelter_management/_form.html.twig', { button_label: 'Update' }) }}
+{% endblock %}

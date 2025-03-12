@@ -44,7 +44,7 @@ final class AsideMenu
                     "submenus" => [
                         [
                             "name" => "Shelter Info",
-                            "route" => "app_shelter_dashboard"
+                            "route" => "app_shelter_management_edit"
                         ]
 
                     ]
