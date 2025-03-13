@@ -36,7 +36,7 @@ class ShelterType extends AbstractType
                 'phoneNumber2',
                 TelType::class,
                 [
-                    'label' => 'Phone Number 1'
+                    'label' => 'Phone Number 2'
                 ]
             )
             ->add(

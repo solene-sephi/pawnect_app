@@ -1,0 +1,20 @@
+label.required:before {
+    content: "*";
+    @apply mr-1;
+}
+
+.form-layout-grid {
+    @apply grid gap-2 md:grid-cols-2 md:gap-4;
+}
+
+.form-item-md-half {
+    @apply w-full;
+}
+
+.form-item-full-width {
+    @apply md:col-span-2;
+}
+
+.form-button {
+    @apply my-4 flex justify-end;
+}

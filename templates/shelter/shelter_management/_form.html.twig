@@ -1,6 +1,8 @@
-<div class="lg:w-xl mx-auto">
+<div class="md:w-md lg:w-xl mx-auto">
   {{ form_start(form) }}
-  {{ form_widget(form) }}
-  <button class="btn btn-secondary">{{ button_label|default('Save') }}</button>
+  {% include 'form/shelter_with_address_form.html.twig' with {shelterForm: form, addressForm: form.address} %}
+  <div class="form-button">
+    <button class="btn btn-secondary">{{ button_label|default('Save') }}</button>
+  </div>
   {{ form_end(form) }}
 </div>
