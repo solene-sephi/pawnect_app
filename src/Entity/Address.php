@@ -28,9 +28,6 @@ class Address
     #[ORM\Column(length: 100)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 100, nullable: true)]
-    private ?string $state = null;
-
     #[ORM\Column(length: 100)]
     private ?string $country = null;
 
@@ -68,18 +65,6 @@ class Address
     public function setCity(string $city): static
     {
         $this->city = $city;
-
-        return $this;
-    }
-
-    public function getState(): ?string
-    {
-        return $this->state;
-    }
-
-    public function setState(string $state): static
-    {
-        $this->state = $state;
 
         return $this;
     }
