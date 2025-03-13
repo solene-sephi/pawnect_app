@@ -23,11 +23,6 @@ class AddressType extends AbstractType
                 'label' => 'City',
                 'disabled' => in_array('city', $disabledFields),
             ])
-            ->add('state', TextType::class, [
-                'label' => 'State',
-                'disabled' => in_array('state', $disabledFields),
-                'required' => false,
-            ])
             ->add('country', TextType::class, [
                 'label' => 'Country',
                 'disabled' => in_array('country', $disabledFields),

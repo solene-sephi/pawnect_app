@@ -2,10 +2,8 @@
 
 namespace App\Controller\Shelter;
 
-use App\Entity\Shelter;
 use App\Service\ShelterService;
 use App\Form\Shelter\ShelterType;
-use App\Repository\ShelterRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -1,6 +1,6 @@
 twig:
   file_name_pattern: "*.twig"
-  form_themes: ["form/default.html.twig"]
+  form_themes: ["form/default_layout.html.twig"]
 
   globals:
     site_name: "%app.site.name%"
