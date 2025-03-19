@@ -64,7 +64,6 @@ class ShelterType extends AbstractType
                 'address',
                 AddressType::class,
                 [
-                    'label' => 'Address',
                     'disabled_fields' => $options['disabled_fields']
                 ]
             );

@@ -4,10 +4,12 @@ namespace App\Controller\Shelter;
 
 use App\Service\ShelterService;
 use App\Form\Shelter\ShelterType;
+use App\Security\Voter\ShelterVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/shelter')]
@@ -22,11 +24,14 @@ final class ShelterManagementController extends AbstractController
     {
         $shelter = $this->shelterService->getShelterForLoggedUser();
 
+        $this->denyAccessUnlessGranted(ShelterVoter::EDIT_PARTIALLY, $shelter);
+
         $form = $this->createForm(
             ShelterType::class,
             $shelter,
             ['disabled_fields' => ['street', 'city', 'state', 'country', 'zipCode']]
         );
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
