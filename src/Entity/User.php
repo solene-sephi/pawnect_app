@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Validator as AcmeAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,6 +12,7 @@ use App\Entity\Trait\TimestampableTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -22,6 +24,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
     ]
 )]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[Assert\Cascade]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use TimestampableTrait;
@@ -33,30 +36,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 100)]
+    #[Assert\Email]
     private ?string $email = null;
 
     /**
      * @var list<string> The user roles
      */
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Count(min: 1)]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+    // Constraints in controller because plain password 
     private ?string $password = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\Length(max: 100)]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\Length(max: 100)]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 20, nullable: true)]
+    #[Assert\Length(min: 4, max: 100)]
+    #[AcmeAssert\PhoneNumber]
     private ?string $phone = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\DateTime]
     private ?\DateTimeImmutable $lastLogin = null;
 
     #[ORM\OneToOne(mappedBy: 'employeeUser', cascade: ['persist', 'remove'])]
@@ -75,6 +89,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $adoptionRequests;
 
     #[ORM\Column]
+    #[Assert\Type('boolean')]
     private bool $isVerified = false;
 
     public function __construct()
