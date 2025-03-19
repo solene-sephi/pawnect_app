@@ -3,6 +3,7 @@
 namespace App\Entity\Trait;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Warning : add #[HasLifecycleCallbacks] annotation for each entity implementing this trait
@@ -10,9 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
 trait TimestampableTrait
 {
     #[ORM\Column]
+    #[Assert\DateTime]
+    #[Assert\NotBlank]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\DateTime]
     private ?\DateTimeImmutable $updatedAt = null;
 
 
