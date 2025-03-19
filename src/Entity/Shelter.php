@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Validator as AcmeAssert;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ShelterRepository;
@@ -19,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         "where" => "((deleted_at IS NULL))"
     ]
 )]
+#[Assert\Cascade]
 class Shelter
 {
     use TimestampableTrait;
@@ -30,22 +32,42 @@ class Shelter
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 100)]
+    #[AcmeAssert\ValidNameWithNumbers]
     private ?string $name = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 4, max: 100)]
+    #[AcmeAssert\PhoneNumber]
     private ?string $phoneNumber1 = null;
 
     #[ORM\Column(length: 20, nullable: true)]
+    #[Assert\Length(min: 4, max: 100)]
+    #[AcmeAssert\PhoneNumber]
     private ?string $phoneNumber2 = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 100)]
+    #[Assert\Email]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private ?string $openingHours = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\Length(max: 5000)]
     private ?string $description = null;
+
+    #[ORM\OneToOne(inversedBy: 'shelter', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
+    #[Assert\Type(Address::class)]
+    private ?Address $address = null;
 
     /**
      * @var Collection<int, ShelterEmployee>
@@ -73,10 +95,6 @@ class Shelter
      */
     #[ORM\OneToMany(targetEntity: FosterAnimalOffer::class, mappedBy: 'shelter', orphanRemoval: true)]
     private Collection $fosterAnimalOffers;
-
-    #[ORM\OneToOne(inversedBy: 'shelter', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Address $address = null;
 
     /**
      * @var Collection<int, AnimalArrival>
