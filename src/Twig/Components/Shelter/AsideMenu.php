@@ -2,8 +2,10 @@
 
 namespace App\Twig\Components\Shelter;
 
-use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
+use App\Security\Voter\ShelterVoter;
+use App\Service\ShelterService;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent]
 final class AsideMenu
@@ -18,6 +20,7 @@ final class AsideMenu
 
     public function __construct(
         private Security $security,
+        private ShelterService $shelterService,
     ) {
     }
 
@@ -44,7 +47,7 @@ final class AsideMenu
                     "submenus" => [
                         [
                             "name" => "Shelter Info",
-                            "route" => "app_shelter_management_edit"
+                            "route" => "app_shelter_dashboard"
                         ]
 
                     ]
@@ -57,8 +60,9 @@ final class AsideMenu
     }
     private function addAdminMenuItems(array &$menuItems): void
     {
-        if ($this->security->isGranted("ROLE_SHELTER_ADMIN")) {
+        $shelter = $this->shelterService->getShelterForLoggedUser();
 
+        if ($this->security->isGranted(ShelterVoter::EDIT_PARTIALLY, $shelter)) {
             $menuItems["shelter"]["submenus"][] =
                 [
                     "name" => "Manage Employees",

@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\User;
 use App\Entity\Shelter;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ShelterService
 {
@@ -17,9 +18,11 @@ class ShelterService
     {
         $user = $this->security->getUser();
 
-        if ($user instanceof User) {
-            return $user->getShelterEmployee()->getShelter();
+        if (!$user instanceof UserInterface) {
+            return null;
         }
-        return null;
+
+        /** @var User $user */
+        return $user->getShelterEmployee()->getShelter();
     }
 }

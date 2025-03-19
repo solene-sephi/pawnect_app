@@ -1,4 +1,4 @@
-{% if alert == 'alert' %}
+{% if type == 'alert' %}
   <div class="p-4 mb-4 text-sm text-red-800 rounded-sm bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% else %}
   TODO
