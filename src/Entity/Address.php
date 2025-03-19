@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AddressRepository;
 use App\Entity\Trait\TimestampableTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
 #[ORM\Table(name: '`address`')]
@@ -13,6 +14,7 @@ use App\Entity\Trait\TimestampableTrait;
 #[ORM\Index(name: 'idx_address_zip_code', fields: ['zipCode'])]
 #[ORM\Index(name: 'idx_address_city', fields: ['city'])]
 
+#[Assert\Cascade]
 class Address
 {
     use TimestampableTrait;
@@ -23,15 +25,23 @@ class Address
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 5000)]
     private ?string $street = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 100)]
     private ?string $city = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $country = null;
+    #[Assert\EqualTo(value: "France", message: "The country must be France.")]
+    private ?string $country = "France";
 
     #[ORM\Column(length: 20)]
+    #[Assert\NotBlank]
+    #[Assert\Length(exactly: 5)]
+    #[Assert\Regex("/^[0-9]{5}$/", message: "Please enter a valid zip code with 5 digits.")]
     private ?string $zipCode = null;
 
     #[ORM\OneToOne(mappedBy: 'address', cascade: ['persist', 'remove'])]

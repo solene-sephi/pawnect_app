@@ -25,7 +25,8 @@ class AddressType extends AbstractType
             ])
             ->add('country', TextType::class, [
                 'label' => 'Country',
-                'disabled' => in_array('country', $disabledFields),
+                'data' => 'France',
+                'disabled' => true,
             ])
             ->add('zipCode', TextType::class, [
                 'label' => 'Zip Code',
