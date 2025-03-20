@@ -5,7 +5,9 @@ namespace App\Form\Shelter;
 use App\Entity\Shelter;
 use App\Form\AddressType;
 use Symfony\Component\Form\AbstractType;
+use App\Service\ShelterPermissionService;
 use Symfony\Component\Form\FormBuilderInterface;
+use App\Form\EventListener\ShelterFormSubscriber;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,6 +16,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ShelterType extends AbstractType
 {
+    public function __construct(
+        private ShelterPermissionService $shelterPermissionService
+    ) {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -21,7 +28,6 @@ class ShelterType extends AbstractType
                 'name',
                 TextType::class,
                 [
-                    'disabled' => true,
                     'label' => 'Shelter name',
                 ]
             )
@@ -64,16 +70,18 @@ class ShelterType extends AbstractType
                 'address',
                 AddressType::class,
                 [
-                    'disabled_fields' => $options['disabled_fields']
+                    'related_entity' => $options['address_related_entity']
                 ]
             );
+
+        $builder->addEventSubscriber(new ShelterFormSubscriber($this->shelterPermissionService));
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Shelter::class,
-            'disabled_fields' => [],
+            'address_related_entity' => null,
         ]);
     }
 }

@@ -9,7 +9,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/shelter')]
@@ -24,12 +23,16 @@ final class ShelterManagementController extends AbstractController
     {
         $shelter = $this->shelterService->getShelterForLoggedUser();
 
+        /**
+         * We can't use an attribute for access control because the $shelter is fetched inside the method, 
+         * not passed as a parameter.
+         */
         $this->denyAccessUnlessGranted(ShelterVoter::EDIT_PARTIALLY, $shelter);
 
         $form = $this->createForm(
             ShelterType::class,
             $shelter,
-            ['disabled_fields' => ['street', 'city', 'state', 'country', 'zipCode']]
+            ['address_related_entity' => $shelter]
         );
 
         $form->handleRequest($request);
