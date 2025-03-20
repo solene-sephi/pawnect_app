@@ -2,26 +2,31 @@
 
 namespace App\Form;
 use App\Entity\Address;
+use App\Service\ShelterPermissionService;
 use Symfony\Component\Form\AbstractType;
-
 use Symfony\Component\Form\FormBuilderInterface;
+use App\Form\EventListener\AddressFormSubscriber;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AddressType extends AbstractType
 {
+
+    public function __construct(
+        private ShelterPermissionService $shelterPermissionService
+    ) {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $disabledFields = $options['disabled_fields'];
+        $relatedEntity = $options['related_entity'] ?? null;
 
         $builder
             ->add('street', TextType::class, [
                 'label' => 'Street',
-                'disabled' => in_array('street', $disabledFields),
             ])
             ->add('city', TextType::class, [
                 'label' => 'City',
-                'disabled' => in_array('city', $disabledFields),
             ])
             ->add('country', TextType::class, [
                 'label' => 'Country',
@@ -30,8 +35,9 @@ class AddressType extends AbstractType
             ])
             ->add('zipCode', TextType::class, [
                 'label' => 'Zip Code',
-                'disabled' => in_array('zipCode', $disabledFields),
             ]);
+
+        $builder->addEventSubscriber(new AddressFormSubscriber($this->shelterPermissionService));
 
     }
 
@@ -39,7 +45,7 @@ class AddressType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Address::class,
-            'disabled_fields' => [],
+            'related_entity' => null,
         ]);
     }
 }

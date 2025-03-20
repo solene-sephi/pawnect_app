@@ -2,7 +2,6 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\User;
 use App\Entity\Shelter;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -24,7 +23,7 @@ final class ShelterVoter extends Voter
             && $subject instanceof Shelter;
     }
 
-    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+    public function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
 
@@ -42,11 +41,11 @@ final class ShelterVoter extends Voter
         }
 
         return match ($attribute) {
-            self::EDIT_PARTIALLY => $this->canEditPartially($shelter, $user, $token),
+            self::EDIT_PARTIALLY => $this->canEditPartially($token),
             default => throw new \LogicException('This code should not be reached!')
         };
     }
-    private function canEditPartially(Shelter $shelter, User $user, TokenInterface $token): bool
+    private function canEditPartially(TokenInterface $token): bool
     {
         if ($this->accessDecisionManager->decide($token, ['ROLE_SHELTER_ADMIN'])) {
             return true;
