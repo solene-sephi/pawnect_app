@@ -23,6 +23,15 @@ class ShelterService
         }
 
         /** @var User $user */
-        return $user->getShelterEmployee()->getShelter();
+        return $user->getShelterEmployee()->getShelter() ?? null;
+    }
+
+    public function shouldRedirectToShelterDashboard(): bool
+    {
+        return (
+            $this->security->isGranted(attributes: 'ROLE_SHELTER_EMPLOYEE')
+            || $this->security->isGranted('ROLE_SHELTER_ADMIN')
+        )
+            && $this->getShelterForLoggedUser();
     }
 }

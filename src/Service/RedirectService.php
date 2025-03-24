@@ -2,12 +2,13 @@
 
 namespace App\Service;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\RouterInterface;
+use App\Service\ShelterService;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class RedirectService
 {
@@ -15,13 +16,14 @@ class RedirectService
 
     public function __construct(
         private Security $security,
-        private RouterInterface $router
+        private RouterInterface $router,
+        private ShelterService $shelterService
     ) {
     }
 
     public function redirectBasedOnRole(Request $request): Response
     {
-        if ($this->security->isGranted('ROLE_SHELTER_EMPLOYEE') || $this->security->isGranted('ROLE_SHELTER_ADMIN')) {
+        if ($this->shelterService->shouldRedirectToShelterDashboard()) {
             return new RedirectResponse($this->router->generate('app_shelter_dashboard'));
         }
 
@@ -39,4 +41,6 @@ class RedirectService
 
         return new RedirectResponse($this->router->generate('app_home'));
     }
+
+
 }
