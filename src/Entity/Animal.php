@@ -45,7 +45,7 @@ class Animal
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $identificationNumber = null;
 
-    #[ORM\Column(enumType: AnimalIdentificationTypeEnum::class)]
+    #[ORM\Column(enumType: AnimalIdentificationTypeEnum::class, nullable: true)]
     private ?AnimalIdentificationTypeEnum $identificationType = null;
 
     #[ORM\Column(enumType: AnimalSexEnum::class)]
