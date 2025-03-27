@@ -21,7 +21,7 @@ class AnimalBreed
 
     #[ORM\ManyToOne(inversedBy: 'animalBreeds')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?AnimalType $types = null;
+    private ?AnimalType $type = null;
 
     /**
      * @var Collection<int, Animal>
@@ -51,14 +51,14 @@ class AnimalBreed
         return $this;
     }
 
-    public function getTypes(): ?AnimalType
+    public function getType(): ?AnimalType
     {
-        return $this->types;
+        return $this->type;
     }
 
-    public function setTypes(?AnimalType $types): static
+    public function setType(?AnimalType $type): static
     {
-        $this->types = $types;
+        $this->type = $type;
 
         return $this;
     }
