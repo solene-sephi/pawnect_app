@@ -96,6 +96,7 @@
     "fakerphp/faker": "^1.24",
     "symfony/debug-bundle": "7.2.*",
     "symfony/maker-bundle": "^1.62",
-    "symfony/web-profiler-bundle": "7.2.*"
+    "symfony/web-profiler-bundle": "7.2.*",
+    "zenstruck/foundry": "^2.3"
   }
 }
