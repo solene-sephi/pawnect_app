@@ -13,7 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Index(name: 'idx_address_zip_code', fields: ['zipCode'])]
 #[ORM\Index(name: 'idx_address_city', fields: ['city'])]
-
 #[Assert\Cascade]
 class Address
 {

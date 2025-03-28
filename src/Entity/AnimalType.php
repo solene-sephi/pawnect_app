@@ -6,9 +6,11 @@ use App\Repository\AnimalTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AnimalTypeRepository::class)]
 #[ORM\Table(name: '`animal_type`')]
+#[Assert\Cascade]
 class AnimalType
 {
     #[ORM\Id]
@@ -17,6 +19,9 @@ class AnimalType
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\Unique]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 100)]
     private ?string $name = null;
 
     /**

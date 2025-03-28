@@ -6,9 +6,11 @@ use App\Repository\AnimalBreedRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AnimalBreedRepository::class)]
 #[ORM\Table(name: '`animal_breed`')]
+#[Assert\Cascade]
 class AnimalBreed
 {
     #[ORM\Id]
@@ -17,6 +19,9 @@ class AnimalBreed
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\Unique]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 100)]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'animalBreeds')]
