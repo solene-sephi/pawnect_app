@@ -12,6 +12,7 @@ use App\Repository\AnimalRepository;
 use App\Entity\Trait\SoftDeletableTrait;
 use App\Entity\Trait\TimestampableTrait;
 use App\Entity\Enum\AnimalIdentificationTypeEnum;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
 #[ORM\Table(name: '`animal`')]
@@ -22,6 +23,7 @@ use App\Entity\Enum\AnimalIdentificationTypeEnum;
     ]
 )]
 #[ORM\Index(name: 'idx_animal_identification_number', fields: ['identificationNumber'])]
+#[Assert\Cascade]
 class Animal
 {
     use TimestampableTrait;
@@ -33,6 +35,8 @@ class Animal
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 100)]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
@@ -40,15 +44,22 @@ class Animal
     private ?AnimalBreed $breed = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    #[Assert\NotBlank]
+    #[Assert\DateTime]
     private ?\DateTimeImmutable $dateOfBirth = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max: 255)]
     private ?string $identificationNumber = null;
 
     #[ORM\Column(enumType: AnimalIdentificationTypeEnum::class, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Choice(callback: 'getIdentificationTypes')]
     private ?AnimalIdentificationTypeEnum $identificationType = null;
 
     #[ORM\Column(enumType: AnimalSexEnum::class)]
+    #[Assert\NotBlank]
+    #[Assert\Choice(callback: 'getSexes')]
     private ?AnimalSexEnum $sex = null;
 
     #[ORM\ManyToOne(inversedBy: 'animals')]
@@ -83,6 +94,8 @@ class Animal
     private Collection $adoptionRequests;
 
     #[ORM\Column(enumType: AnimalStatusEnum::class)]
+    #[Assert\NotBlank]
+    #[Assert\Choice(callback: 'getStatuses')]
     private ?AnimalStatusEnum $status = null;
 
     /**
@@ -455,5 +468,22 @@ class Animal
         }
 
         return $this;
+    }
+
+    public static function getIdentificationTypes(): array
+    {
+        return array_column(AnimalIdentificationTypeEnum::cases(), 'value');
+
+    }
+    public static function getSexes(): array
+    {
+        return array_column(AnimalSexEnum::cases(), 'value');
+
+    }
+
+    public static function getStatuses(): array
+    {
+        return array_column(AnimalStatusEnum::cases(), 'value');
+
     }
 }
