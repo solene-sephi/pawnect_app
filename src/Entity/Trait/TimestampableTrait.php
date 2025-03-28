@@ -11,12 +11,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait TimestampableTrait
 {
     #[ORM\Column]
-    // These fields are managed automatically by Doctrine via the PrePersist and PreUpdate lifecycle events.
+    // These fields are managed automatically by Doctrine via the PrePersist lifecycle event.
     // Adding a DateTime constraint would interfere with the automatic handling of these fields.
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
-    // These fields are managed automatically by Doctrine via the PrePersist and PreUpdate lifecycle events.
+    // These fields are managed automatically by Doctrine via the PreUpdate lifecycle event.
     // Adding a DateTime constraint would interfere with the automatic handling of these fields.
     private ?\DateTimeImmutable $updatedAt = null;
 
