@@ -10,11 +10,7 @@ use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
  */
 final class ShelterFactory extends PersistentProxyObjectFactory
 {
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
-     *
-     * @todo inject services if required
-     */
+
     public function __construct()
     {
     }
@@ -24,26 +20,18 @@ final class ShelterFactory extends PersistentProxyObjectFactory
         return Shelter::class;
     }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
-     * @todo add your default values here
-     */
     protected function defaults(): array|callable
     {
         return [
-            'address' => AddressFactory::new(),
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'email' => self::faker()->text(180),
-            'name' => self::faker()->text(100),
-            'openingHours' => self::faker()->text(255),
-            'phoneNumber1' => self::faker()->text(20),
+            'address' => AddressFactory::new(),
+            'name' => self::faker()->company(),
+            'phoneNumber1' => self::faker()->phoneNumber(),
+            'email' => self::faker()->safeEmail(),
+            'openingHours' => self::faker()->text(maxNbChars: 30),
         ];
     }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
-     */
     protected function initialize(): static
     {
         return $this
