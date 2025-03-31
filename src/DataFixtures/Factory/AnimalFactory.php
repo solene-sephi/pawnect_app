@@ -3,8 +3,11 @@
 namespace App\DataFixtures\Factory;
 
 use App\Entity\Animal;
+use DateTimeInterface;
 use App\Entity\Enum\AnimalSexEnum;
 use App\Entity\Enum\AnimalStatusEnum;
+use App\DataFixtures\Provider\PetNameProvider;
+use App\Entity\Enum\AnimalIdentificationTypeEnum;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
@@ -12,13 +15,10 @@ use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
  */
 final class AnimalFactory extends PersistentProxyObjectFactory
 {
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
-     *
-     * @todo inject services if required
-     */
+
     public function __construct()
     {
+        self::faker()->addProvider(new PetNameProvider(self::faker()));
     }
 
     public static function class(): string
@@ -26,31 +26,21 @@ final class AnimalFactory extends PersistentProxyObjectFactory
         return Animal::class;
     }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
-     * @todo add your default values here
-     */
     protected function defaults(): array|callable
     {
         return [
-            'breed' => null, // TODO add App\Entity\AnimalBreed type manually
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'dateOfBirth' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'name' => self::faker()->text(100),
+            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeThisDecade()),
+            'name' => self::faker()->petName(),
+            'breed' => AnimalBreedFactory::new(),
+            'dateOfBirth' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeThisDecade()),
             'sex' => self::faker()->randomElement(AnimalSexEnum::cases()),
-            'shelter' => ShelterFactory::new(),
+            'shelter' => ShelterFactory::random(),
             'status' => self::faker()->randomElement(AnimalStatusEnum::cases()),
         ];
     }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
-     */
     protected function initialize(): static
     {
-        return $this
-            // ->afterInstantiate(function(Animal $animal): void {})
-        ;
+        return $this;
     }
 }
