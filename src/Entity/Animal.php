@@ -53,8 +53,6 @@ class Animal
     private ?string $identificationNumber = null;
 
     #[ORM\Column(enumType: AnimalIdentificationTypeEnum::class, nullable: true)]
-    #[Assert\NotBlank]
-    #[Assert\Choice(callback: 'getIdentificationTypes')]
     private ?AnimalIdentificationTypeEnum $identificationType = null;
 
     #[ORM\Column(enumType: AnimalSexEnum::class)]
@@ -192,7 +190,7 @@ class Animal
         return $this->identificationType;
     }
 
-    public function setIdentificationType(AnimalIdentificationTypeEnum $identificationType): static
+    public function setIdentificationType(?AnimalIdentificationTypeEnum $identificationType): static
     {
         $this->identificationType = $identificationType;
 
@@ -470,11 +468,6 @@ class Animal
         return $this;
     }
 
-    public static function getIdentificationTypes(): array
-    {
-        return array_column(AnimalIdentificationTypeEnum::cases(), 'value');
-
-    }
     public static function getSexes(): array
     {
         return array_column(AnimalSexEnum::cases(), 'value');

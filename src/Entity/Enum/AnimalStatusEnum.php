@@ -4,7 +4,7 @@ namespace App\Entity\Enum;
 
 enum AnimalStatusEnum: string
 {
-    case AVAILABLE_FOR_ADOPTION = 'Available for adoption';
+    case IN_SHELTER = 'In shelter';
     case ADOPTED = 'Adopted';
     case IN_FOSTER_CARE = 'In foster care';
 }
