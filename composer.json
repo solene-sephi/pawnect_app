@@ -10,6 +10,7 @@
     "ext-ctype": "*",
     "ext-iconv": "*",
     "doctrine/dbal": "^4",
+    "babdev/pagerfanta-bundle": "^4.5",
     "doctrine/doctrine-bundle": "^2.13",
     "doctrine/doctrine-migrations-bundle": "^3.4",
     "doctrine/orm": "^3.3",
