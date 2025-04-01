@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Enum\AnimalStatusEnum;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -46,7 +47,9 @@ class Animal
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     #[Assert\NotBlank]
     #[Assert\DateTime]
-    private ?\DateTimeImmutable $dateOfBirth = null;
+    private ?DateTimeImmutable $dateOfBirth = null;
+
+    private ?int $age = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
@@ -161,12 +164,12 @@ class Animal
         return $this;
     }
 
-    public function getDateOfBirth(): ?\DateTimeImmutable
+    public function getDateOfBirth(): ?DateTimeImmutable
     {
         return $this->dateOfBirth;
     }
 
-    public function setDateOfBirth(\DateTimeImmutable $dateOfBirth): static
+    public function setDateOfBirth(DateTimeImmutable $dateOfBirth): static
     {
         $this->dateOfBirth = $dateOfBirth;
 
@@ -478,5 +481,20 @@ class Animal
     {
         return array_column(AnimalStatusEnum::cases(), 'value');
 
+    }
+
+    public function getAge(): string
+    {
+        $dateOfBirth = $this->getDateOfBirth();
+        $now = new DateTimeImmutable();
+        $interval = $dateOfBirth->diff($now);
+
+        // If the difference in years is greater than 0, return the age in years
+        if ($interval->y) {
+            return sprintf('%s %s', $interval->y, $interval->y === 1 ? 'year' : 'years');
+        }
+
+        // Otherwise, return the age in months
+        return sprintf('%s %s', $interval->m, $interval->m === 1 ? 'month' : 'months');
     }
 }
