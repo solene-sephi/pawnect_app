@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Animal;
+use Doctrine\ORM\QueryBuilder;
 use App\Entity\Enum\AnimalStatusEnum;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -17,17 +18,12 @@ class AnimalRepository extends ServiceEntityRepository
         parent::__construct($registry, Animal::class);
     }
 
-    /**
-     * @return Animal[] Returns an array of Animal objects
-     */
-    public function findAvailableForAdoption(): array
+    public function AvailableForAdoptionOrderedByNewestQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.deletedAt IS NULL')
             ->andWhere('a.status != :adopted')
             ->orderBy('a.id', 'DESC')
-            ->setParameter('adopted', AnimalStatusEnum::ADOPTED)
-            ->getQuery()
-            ->getResult();
+            ->setParameter('adopted', AnimalStatusEnum::ADOPTED);
     }
 }
