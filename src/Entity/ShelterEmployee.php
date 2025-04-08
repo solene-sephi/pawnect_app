@@ -44,7 +44,7 @@ class ShelterEmployee
         return $this->employeeUser;
     }
 
-    public function setEmployee(User $employeeUser): static
+    public function setEmployeeUser(User $employeeUser): static
     {
         $this->employeeUser = $employeeUser;
 
