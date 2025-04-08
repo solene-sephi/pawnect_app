@@ -1,35 +1,16 @@
 {% extends 'public/layout.html.twig' %}
 
 {% block content %}
-  <div class="bg-tertiary-100 p-3">
-    {% if pager %}
+  <div class="p-3">
+    {% if pager.nbResults is same as(0) %}
+      <p>No animals to display.</p>
+    {% else %}
       <div class="grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4 flex align-center">
         {% for animal in pager %}
-          <a href="#" class="block max-w bg-white rounded-sm shadow-sm hover:bg-tertiary-50">
-            <img class="rounded-t-sm responsive" src="https://placehold.co/600x400" alt="image description" />
-            <div class="p-4">
-              <h5 class="mb-2 text-2xl font-bold text-tertiary-700">{{ animal.name }}</h5>
-              <div class="grid grid-cols-3">
-                <div>
-                  <p class="text-xs text-primary-700 uppercase">Breed</p>
-                  <p>{{ animal.breed.name }}</p>
-                </div>
-                <div>
-                  <p class="text-xs text-primary-700 uppercase">Age</p>
-                  <p>{{ animal.age }}</p>
-                </div>
-                <div>
-                  <p class="text-xs text-primary-700 uppercase">Sex</p>
-                  <p>{{ animal.sex.getLabel(true) }}</p>
-                </div>
-              </div>
-            </div>
-          </a>
+          <twig:Public:AnimalCard :animal="animal" />
         {% endfor %}
       </div>
       <div class="flex align-center justify-center">{{ pagerfanta(pager) }}</div>
-    {% else %}
-      <p>No animals to display.</p>
     {% endif %}
   </div>
 {% endblock %}

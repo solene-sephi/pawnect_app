@@ -1,0 +1,11 @@
+<{{tag}} {% if route %} href="{{ route }}" {% if route starts with 'http' %} rel="noopener" {% endif %} {% endif %} {% if tag == 'button' %} type="{{ type }}" {% endif %} role="button" {{ attributes.without('class') }} {{ attributes.defaults({ class: 'my-2 text-center font-medium focus:outline-none focus:ring-4 rounded-sm ' ~ btnClasses } ) }}>
+	{% if iconbefore %}
+		<twig:ux:icon name="{{ iconbefore }}" class="mr-2 {{ iconClasses }}"/>
+	{% endif %}
+
+	{% block content %}{% endblock %}
+
+	{% if iconafter %}
+		<twig:ux:icon name="{{ iconafter }}" class="ml-2 {{ iconClasses }}"/>
+	{% endif %}
+</{{tag}}>

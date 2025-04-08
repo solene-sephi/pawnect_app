@@ -35,4 +35,16 @@ final class AnimalController extends AbstractController
             'pager' => $pagerfanta,
         ]);
     }
+
+
+    #[Route('/animal/{id}', name: 'app_animal')]
+    public function show(Animal $animal): Response
+    {
+        if (!$animal) {
+            // returns 404
+            throw $this->createNotFoundException('The animal does not exist');
+        }
+        dump($animal);
+        die;
+    }
 }

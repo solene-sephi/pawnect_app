@@ -43,11 +43,10 @@ final class AsideMenu
                 [
                     "icon" => "gridicons:house",
                     "name" => "Administration",
-                    "route" => "app_shelter_dashboard",
                     "submenus" => [
                         [
                             "name" => "Shelter Info",
-                            "route" => "app_shelter_dashboard"
+                            "route" => "app_shelter_management_edit"
                         ]
 
                     ]

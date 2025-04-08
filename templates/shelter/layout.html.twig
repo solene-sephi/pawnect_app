@@ -1,41 +1,37 @@
 {% extends 'base_layout.html.twig' %}
 
 {% block body %}
-  {% block header %}
-    <twig:Shelter:Header />
-  {% endblock %}
-  <div class="p-4 sm:ml-64 bg-white">
-    {% block breadcrumb %}
-      {# TODO : correctement #}
-      <nav class="flex" aria-label="Breadcrumb">
-        <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-          <li class="inline-flex items-center">
-            <a href="#" class="inline-flex items-center text-sm font-medium text-tertiary-900 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">Dashboard</a>
-          </li>
-          <li>
-            <div class="flex items-center">
-              <twig:ux:icon name="iconamoon:arrow-right-2-light" />
-              <a href="#" class="ms-1 text-sm font-medium text-tertiary-900 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Projects</a>
-            </div>
-          </li>
-          <li aria-current="page">
-            <div class="flex items-center">
-              <twig:ux:icon name="iconamoon:arrow-right-2-light" />
-              <span class="ms-1 text-sm font-medium text-tertiary-500 md:ms-2 dark:text-gray-400">Flowbite</span>
-            </div>
-          </li>
-        </ol>
-      </nav>
-    {% endblock %}
-    {% block page_title %}
-      <h1 class="text-lg py-4 font-bold text-secondary-800 md:text-xl">
-        {% block page_title_text %}
-
-        {% endblock %}
-      </h1>
-    {% endblock %}
-    {% block content %}
-
-    {% endblock %}
-  </div>
+	{% block header %}
+		<twig:Shelter:Header/>
+	{% endblock %}
+	<div class="p-4 sm:ml-64 bg-white">
+		{% block breadcrumb %}
+			{# TODO : correctement #}
+			<nav class="flex" aria-label="Breadcrumb">
+				<ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+					<li class="inline-flex items-center">
+						<a href="#" class="inline-flex items-center text-sm font-medium text-tertiary-900 hover:text-blue-600">Dashboard</a>
+					</li>
+					<li>
+						<div class="flex items-center">
+							<twig:ux:icon name="iconamoon:arrow-right-2-light"/>
+							<a href="#" class="ms-1 text-sm font-medium text-tertiary-900 hover:text-blue-600 md:ms-2">Projects</a>
+						</div>
+					</li>
+					<li aria-current="page">
+						<div class="flex items-center">
+							<twig:ux:icon name="iconamoon:arrow-right-2-light"/>
+							<span class="ms-1 text-sm font-medium text-tertiary-500 md:ms-2">Flowbite</span>
+						</div>
+					</li>
+				</ol>
+			</nav>
+		{% endblock %}
+		{% block page_title %}
+			<h1>
+				{% block page_title_text %}{% endblock %}
+			</h1>
+		{% endblock %}
+		{% block content %}{% endblock %}
+	</div>
 {% endblock %}

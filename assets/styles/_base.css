@@ -1,0 +1,15 @@
+@layer base {
+    body {
+        color: var(--color-primary-900);
+    }
+
+    h1 {
+        font-size: var(--text-xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-secondary-800);
+
+        @variant md {
+            font-size: var(--text-2xl);
+        }
+    }
+}

@@ -40,6 +40,11 @@ final class ShelterManagementController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash(
+                'notice',
+                'Your changes were saved!'
+            );
+
             return $this->redirectToRoute('app_shelter_management_edit');
         }
 

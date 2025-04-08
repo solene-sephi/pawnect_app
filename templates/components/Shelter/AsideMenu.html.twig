@@ -1,42 +1,31 @@
 <!-- drawer init and toggle -->
-<button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-sm sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-  <span class="sr-only">Open sidebar</span>
-  {{ ux_icon('stash:burger-classic') }}
+<button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-sm sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
+	<span class="sr-only">Open sidebar</span>
+	{{ ux_icon('stash:burger-classic') }}
 </button>
 
 <!-- drawer component -->
 <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-  <div class="h-full px-3 py-4 overflow-y-auto bg-tertiary-50 border-r border-tertiary-300 dark:bg-gray-800">
-    <div class="px-2 pb-4 pt-0">
-      <img src="{{ asset('images/logo.svg') }}" class="h-3 filter-primary" alt="{{ site_name }} Logo" />
-    </div>
-    <ul class="text-sm">
-      {% for item in this.menuItems %}
-        <li>
-          {% if item.submenus is defined %}
-            <button type="button" class="dropdown-arrow-icon-btn flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-sm group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="{{ item.name }}-dropdown" data-collapse-toggle="{{ item.name }}-dropdown">
-              <twig:ux:icon name="{{ item.icon }}" />
-              <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">{{ item.name }}</span>
-              <twig:ux:icon name="iconamoon:arrow-down-2-duotone" class="w-5 h-5 dropdown-arrow-icon" />
-            </button>
-            <ul id="{{ item.name }}-dropdown" class="hidden">
-              {% for subItem in item.submenus %}
-                <li>
-                  <a href="{{ path(subItem.route) }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-sm pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ subItem.name }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <a href="{{ path(item.route) }}" class="flex items-center p-2 text-gray-900 rounded-sm dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-              <twig:ux:icon name="{{ item.icon }}" />
-              <span class="ms-3">{{ item.name }}</span>
-            </a>
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
+	<div class="h-full px-3 py-4 overflow-y-auto bg-tertiary-50 border-r border-tertiary-300">
+		<div class="px-2 pb-4 pt-0">
+			<img src="{{ asset('images/logo.svg') }}" class="h-3 filter-primary" alt="{{ site_name }} Logo"/>
+		</div>
+		<ul class="text-sm">
+			{% for item in this.menuItems %}
+				<li>
+					{% if item.submenus is defined %}
+						<twig:Dropdown :id="item.name" :icon="item.icon" :label="item.name" :subitems="item.submenus"></twig:Dropdown>
+					{% else %}
+						<a href="{{ path(item.route) }}" class="flex items-center p-2 text-gray-900 rounded-sm hover:bg-gray-100 group">
+							<twig:ux:icon name="{{ item.icon }}"/>
+							<span class="ms-3">{{ item.name }}</span>
+						</a>
+					{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
 </aside>
 
 {# Copy and paste of the background backdrop, because otherwise, when it's added to the DOM, the classes aren't recognized, since with Tailwind, only the classes actually used are loaded. #}
-<div class="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-30 hidden"></div>
+<div class="bg-gray-900/50 fixed inset-0 z-30 hidden"></div>

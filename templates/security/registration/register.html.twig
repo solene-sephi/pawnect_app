@@ -1,24 +1,27 @@
 {% extends 'security/layout.html.twig' %}
 
 {% block page_title_text %}
-  Create an account
+	Create an account
 {% endblock %}
 
 {% block content %}
-  {{ form_start(registrationForm) }}
+	{{ form_start(registrationForm) }}
 
-  <div>{{ form_errors(form) }}</div>
+	<div>{{ form_errors(registrationForm) }}</div>
 
-  <form class="space-y-4 md:space-y-6" action="{{ path('app_register') }}">
-    {{ form_row(registrationForm._token) }}
-    {{ form_row(registrationForm.email) }}
-    {{ form_row(registrationForm.plainPassword, { label: 'Password' }) }}
-    {{ form_row(registrationForm.agreeTerms) }}
-    <button type="submit" class="w-full btn btn-secondary mb-0">Create an account</button>
-  </form>
-  {{ form_end(registrationForm) }}
+	<form class="space-y-4 md:space-y-6" action="{{ path('app_register') }}">
+		{{ form_row(registrationForm._token) }}
+		{{ form_row(registrationForm.email) }}
+		{{ form_row(registrationForm.plainPassword, { label: 'Password' }) }}
+		{{ form_row(registrationForm.agreeTerms) }}
 
-  <p class="text-sm font-light">
-    Already have an account? <a href="{{ path('app_login') }}" class="font-medium text-secondary-600 hover:underline">Login here</a>
-  </p>
+		<twig:Button type="submit" color="secondary" isfullwidth class="mb-0" iconafter="iconamoon:arrow-right-1-light">Create an account</twig:Button>
+	</form>
+
+	{{ form_end(registrationForm) }}
+
+	<p class="text-sm font-light">
+		Already have an account?
+		<a href="{{ path('app_login') }}" class="font-medium text-secondary-600 hover:underline">Login here</a>
+	</p>
 {% endblock %}

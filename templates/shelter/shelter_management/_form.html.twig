@@ -1,11 +1,11 @@
 <div class="md:w-md lg:w-xl mx-auto">
-  {{ form_start(form) }}
-  
-  <div>{{ form_errors(form) }}</div>
+	{{ form_start(form) }}
 
-  {% include 'form/shelter_with_address_form.html.twig' with {shelterForm: form, addressForm: form.address} %}
-  <div class="form-button">
-    <button class="btn btn-secondary">{{ button_label|default('Save') }}</button>
-  </div>
-  {{ form_end(form) }}
+	<div>{{ form_errors(form) }}</div>
+
+	{% include 'form/shelter_with_address_form.html.twig' with {shelterForm: form, addressForm: form.address} %}
+	<div class="form-button">
+		<twig:Button type="submit" color="secondary">{{ button_label|default('Save') }}</twig:Button>
+	</div>
+	{{ form_end(form) }}
 </div>
