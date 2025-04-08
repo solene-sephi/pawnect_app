@@ -20,7 +20,7 @@ final class DefaultAnimalBreedStory extends Story
         foreach (self::$breedsByType as $typeName => $breeds) {
             $type = AnimalTypeFactory::find(['name' => $typeName]);
             foreach ($breeds as $breedName) {
-                AnimalBreedFactory::findOrCreate(['name' => $breedName, 'type' => $type]);
+                AnimalBreedFactory::createOne(['name' => $breedName, 'type' => $type]);
             }
         }
     }

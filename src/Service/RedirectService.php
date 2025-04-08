@@ -64,7 +64,7 @@ class RedirectService
     {
         $targetPath = $this->getTargetPath(
             $request->getSession(),
-            $this->security->getFirewallConfig($request)
+            'main'
         );
 
         if ($targetPath) {

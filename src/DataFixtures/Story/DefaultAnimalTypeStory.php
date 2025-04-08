@@ -12,7 +12,7 @@ final class DefaultAnimalTypeStory extends Story
     public function build(): void
     {
         foreach (self::$typeNames as $type) {
-            AnimalTypeFactory::findOrCreate(['name' => $type]);
+            AnimalTypeFactory::createOne(['name' => $type]);
         }
     }
 }
