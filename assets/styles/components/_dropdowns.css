@@ -1,8 +1,0 @@
-/* Dropdown button arrow icon rotation on opening */
-.dropdown-arrow-icon {
-    transition: transform 0.3s ease;
-}
-
-.dropdown-arrow-icon-btn[aria-expanded="true"] .dropdown-arrow-icon {
-    transform: rotate(180deg);
-}

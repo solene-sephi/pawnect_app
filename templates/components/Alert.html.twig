@@ -1,0 +1,16 @@
+<div id="alert-{{ id }}" {{ attributes.defaults({ class: 'flex items-center p-4 mb-4 text-sm rounded-sm border border-solid ' ~ blockClasses } )}} role="alert" {{ attributes.without('class') }}>
+
+	{% if label is defined %}
+		<span class="sr-only">{{ label }}</span>
+	{% endif %}
+
+	<div class="ms-3 text-sm font-medium"> {% block content %}{% endblock %}
+		</div>
+		{% if closable %}
+			<button type="button" data-dismiss-target="#alert-{{ id }}" aria-label="Close" class="ms-auto -mx-1.5 -my-1.5 rounded-lg focus:ring-2 p-1.5 inline-flex items-center justify-center h-8 w-8" ~ closebuttonclasses>
+				<span class="sr-only">Close</span>
+				{{ ux_icon('material-symbols:close-rounded') }}
+			</button>
+		{% endif %}
+
+	</div>

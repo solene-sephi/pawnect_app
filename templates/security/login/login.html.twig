@@ -1,49 +1,52 @@
 {% extends 'security/layout.html.twig' %}
 
 {% block page_title_text %}
-  Log in
+	Log in
 {% endblock %}
 
 {% block content %}
 
-    {% if error %}
-      {% include "components/_alert.html.twig" with {'error': error, 'type': 'alert'} %}
-    {% endif %}
+	{% if error %}
+		<twig:Alert type="error" closable context="login">{{ error.messageKey|trans(error.messageData, 'security') }}</twig:Alert>
+	{% endif %}
 
-  <form method="post">
-  {# TODO #}
-    {# {% if app.user %}
-      <div class="mb-3">
-        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-      </div>
-    {% endif %} #}
+	<form method="post">
+		{# TODO #}
+		{# {% if app.user %}
+				<div class="mb-3">
+					You are logged in as
+					{{ app.user.userIdentifier }},
+					<a href="{{ path('app_logout') }}">Logout</a>
+				</div>{% endif %}#}
 
-    <div class="mb-3">
-      <label for="username" class="block mb-2 text-sm font-medium text-tertiary-800 dark:text-white required">Email</label>
-      <input type="email" value="{{ last_username }}" name="_username" id="username" class="text-tertiary-800 bg-white rounded-sm text-sm block w-full p-2.5 border border-tertiary-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-tertiary-700 dark:border-tertiary-600 dark:text-white dark:placeholder-tertiary-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" autocomplete="email" required autofocus />
-    </div>
-    <div class="mb-3">
-      <label for="password" class="block mb-2 text-sm font-medium text-tertiary-800 dark:text-white required">Password</label>
-      <input type="password" name="_password" id="password" class="text-tertiary-800 bg-white rounded-sm text-sm block w-full p-2.5 border border-tertiary-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-tertiary-700 dark:border-tertiary-600 dark:text-white dark:placeholder-tertiary-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" autocomplete="current-password" required />
-    </div>
-    <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+			<div class="mb-3"> <label for="username" class="block mb-2 text-sm font-medium text-tertiary-800 required">Email</label>
+			<input type="email" value="{{ last_username }}" name="_username" id="username" class="text-tertiary-800 bg-white rounded-sm text-sm block w-full p-2.5 border border-tertiary-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500" autocomplete="email" required autofocus/>
+		</div>
+		<div class="mb-3">
+			<label for="password" class="block mb-2 text-sm font-medium text-tertiary-800 required">Password</label>
+			<input type="password" name="_password" id="password" class="text-tertiary-800 bg-white rounded-sm text-sm block w-full p-2.5 border border-tertiary-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500" autocomplete="current-password" required/>
+		</div>
+		<input
+		type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
 
-    {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
+		{#
+																Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+																See https://symfony.com/doc/current/security/remember_me.html
+																									
+														     + See : https://symfonycasts.com/screencast/symfony2-ep2/twig-security-is-authenticated 
+																									
+																<div class="checkbox mb-3">
+																	<input type="checkbox" name="_remember_me" id="_remember_me">
+																	<label for="_remember_me">Remember me</label>
+																	</div>
+																#}
 
-            + See : https://symfonycasts.com/screencast/symfony2-ep2/twig-security-is-authenticated 
+		<twig:Button type="submit" color="secondary" isfullwidth class="mb-0" iconafter="iconamoon:arrow-right-1-light">Sign in</twig:Button>
 
-            <div class="checkbox mb-3">
-                <input type="checkbox" name="_remember_me" id="_remember_me">
-                <label for="_remember_me">Remember me</label>
-            </div>
-        #}
+	</form>
 
-    <button class="w-full btn btn-secondary mb-0" type="submit">Sign in</button>
-  </form>
-
-  <p class="text-sm font-light">
-    Don't have an account? <a href="{{ path('app_register') }}" class="font-medium text-secondary-600 hover:underline">Register here</a>
-  </p>
+	<p class="text-sm font-light">
+		Don't have an account?
+		<a href="{{ path('app_register') }}" class="font-medium text-secondary-600 hover:underline">Register here</a>
+	</p>
 {% endblock %}

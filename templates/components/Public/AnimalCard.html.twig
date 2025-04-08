@@ -1,0 +1,22 @@
+{% props animal = null %}
+
+<a href="#" class="block max-w bg-white rounded-default hover:shadow-sm">
+  <img class="rounded-t-sm img-responsive" src="https://placehold.co/600x400" alt="image description" />
+  <div class="p-4">
+    <p class="mb-2 text-2xl font-bold text-tertiary-700">{{ animal.name }}</p>
+    <div class="grid grid-cols-3">
+      <div>
+        <p class="text-xs text-primary-700 uppercase">Breed</p>
+        <p>{{ animal.breed.name }}</p>
+      </div>
+      <div>
+        <p class="text-xs text-primary-700 uppercase">Age</p>
+        <p>{{ animal.age }}</p>
+      </div>
+      <div>
+        <p class="text-xs text-primary-700 uppercase">Sex</p>
+        <p>{{ animal.sex.getLabel(true) }}</p>
+      </div>
+    </div>
+  </div>
+</a>

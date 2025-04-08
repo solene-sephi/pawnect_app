@@ -1,27 +1,34 @@
 {% extends 'security/layout.html.twig' %}
 
 {% block content %}
-  <h1 class="text-xl font-bold leading-tight tracking-tight text-secondary-800 md:text-2xl">Thank you for registering !</h1>
+	<h1>Thank you for registering !</h1>
 
-  <p>
-    You still have remaining steps to complete your account validation process. <span class="font-bold">Please check your inbox and click the link emailed to you.</span>
-  </p>
+	<p>
+		You still have remaining steps to complete your account validation process.
+		<span class="font-bold">Please check your inbox and click the link emailed to you.</span>
+	</p>
 
-  <ol class="flex items-center justify-between w-full space-x-4 rtl:space-x-reverse">
-    <li class="flex flex-col items-center text-green-500 space-y-2">
-      {{ ux_icon('ic:outline-create') }}
-      <span class="text-center"><p class="font-medium leading-tight">Create your account</p></span>
-    </li>
-    <li class="flex flex-col items-center space-y-2">
-      {{ ux_icon('ic:outline-mail') }}
-      <span class="text-center"><p class="font-medium leading-tight">Email confirmation</p></span>
-    </li>
-    <li class="flex flex-col items-center text-gray-500 dark:text-gray-400 space-y-2">
-      {{ ux_icon('bx:party') }}
-      <span class="text-center"><p class="font-medium leading-tight">Validate account</p></span>
-    </li>
-  </ol>
-  <div class="flex items-center justify-center">
-    <a href="{{ path('app_login') }}" class="btn btn-tertiary">Back to login</a>
-  </div>
+	<ol class="flex items-center justify-between w-full space-x-4 rtl:space-x-reverse">
+		<li class="flex flex-col items-center text-green-500 space-y-2">
+			{{ ux_icon('ic:outline-create') }}
+			<span class="text-center">
+				<p class="font-medium leading-tight">Create your account</p>
+			</span>
+		</li>
+		<li class="flex flex-col items-center space-y-2">
+			{{ ux_icon('ic:outline-mail') }}
+			<span class="text-center">
+				<p class="font-medium leading-tight">Email confirmation</p>
+			</span>
+		</li>
+		<li class="flex flex-col items-center text-gray-500 space-y-2">
+			{{ ux_icon('bx:party') }}
+			<span class="text-center">
+				<p class="font-medium leading-tight">Validate account</p>
+			</span>
+		</li>
+	</ol>
+	<div class="flex items-center justify-center">
+		<twig:Button :route="path('app_login')" color="tertiary">Back to login</twig:Button>
+	</div>
 {% endblock %}

@@ -42,7 +42,8 @@ class ShelterType extends AbstractType
                 'phoneNumber2',
                 TelType::class,
                 [
-                    'label' => 'Phone Number 2'
+                    'label' => 'Phone Number 2',
+                    'required' => false,
                 ]
             )
             ->add(
@@ -63,7 +64,8 @@ class ShelterType extends AbstractType
                 'description',
                 TextareaType::class,
                 [
-                    'label' => 'Shelter Description'
+                    'label' => 'Shelter Description',
+                    'required' => false,
                 ]
             )
             ->add(

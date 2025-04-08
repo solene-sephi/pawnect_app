@@ -45,16 +45,16 @@ trait TimestampableTrait
         return $this;
     }
 
-    #[ORM\PrePersist]
-    public function setCreatedAtValue(): void
-    {
-        $this->createdAt = new \DateTimeImmutable();
-        $this->setUpdatedAtValue();
-    }
+    // #[ORM\PrePersist]
+    // public function setCreatedAtValue(): void
+    // {
+    //     $this->createdAt = new \DateTimeImmutable();
+    //     $this->setUpdatedAtValue();
+    // }
 
-    #[ORM\PreUpdate]
-    public function setUpdatedAtValue(): void
-    {
-        $this->updatedAt = new \DateTimeImmutable();
-    }
+    // #[ORM\PreUpdate]
+    // public function setUpdatedAtValue(): void
+    // {
+    //     $this->updatedAt = new \DateTimeImmutable();
+    // }
 }

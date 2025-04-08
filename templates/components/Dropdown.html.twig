@@ -1,0 +1,14 @@
+<div{{attributes}}>
+	<button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-sm group hover:bg-gray-100" aria-controls="{{ id }}-dropdown" data-collapse-toggle="{{ id }}-dropdown">
+		<twig:ux:icon name="{{ icon }}"/>
+		<span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">{{ label }}</span>
+		<twig:ux:icon name="iconamoon:arrow-down-2-duotone" class="w-5 h-5 transform transition-transform duration-300 group-aria-expanded:rotate-180"/>
+	</button>
+	<ul id="{{ id }}-dropdown" class="hidden">
+		{% for subItem in subitems %}
+			<li>
+				<a href="{{ path(subItem.route) }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-sm pl-11 group hover:bg-gray-100">{{ subItem.name }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
