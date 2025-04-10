@@ -1,22 +1,30 @@
 {% props animal = null %}
+<div class="bg-primary-400 rounded-sm">
+	<a href="#" class="h-full flex flex-col block transition-all duration-500 hover:-translate-y-1 hover:translate-x-1 rounded-sm max-w border border-black font-medium rounded-sm hover:shadow-sm bg-tertiary-100">
 
-<a href="#" class="block max-w bg-white rounded-default hover:shadow-sm">
-  <img class="rounded-t-sm img-responsive" src="https://placehold.co/600x400" alt="image description" />
-  <div class="p-4">
-    <p class="mb-2 text-2xl font-bold text-tertiary-700">{{ animal.name }}</p>
-    <div class="grid grid-cols-3">
-      <div>
-        <p class="text-xs text-primary-700 uppercase">Breed</p>
-        <p>{{ animal.breed.name }}</p>
-      </div>
-      <div>
-        <p class="text-xs text-primary-700 uppercase">Age</p>
-        <p>{{ animal.age }}</p>
-      </div>
-      <div>
-        <p class="text-xs text-primary-700 uppercase">Sex</p>
-        <p>{{ animal.sex.getLabel(true) }}</p>
-      </div>
-    </div>
-  </div>
-</a>
+		<img class="rounded-t-sm border-b border-black img-responsive" src="https://placehold.co/600x400" alt="image description"/>
+		<div class="p-2 grow flex flex-col justify-between">
+
+			<p class="mb-2 text-2xl font-bold">{{ animal.name }}</p>
+			<div class="grid grid-cols-3">
+				<div>
+					<p class="text-xs uppercase text-secondary-800">Breed</p>
+					<p>{{ animal.breed.name }}</p>
+				</div>
+				<div>
+					<p class="text-xs uppercase text-secondary-800">Age</p>
+					<p>{{ animal.age }}</p>
+				</div>
+				<div>
+					<p class="text-xs uppercase text-secondary-800">Sex</p>
+					<p>{{ animal.sex.getLabel(true) }}</p>
+				</div>
+
+			</div>
+			<div class="flex justify-center mt-auto">
+				<twig:Button color="secondary" class="mt-2">Adopt
+					{{ animal.name }}</twig:Button>
+			</div>
+		</div>
+	</a>
+</div>

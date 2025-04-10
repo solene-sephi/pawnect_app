@@ -1,16 +1,16 @@
 {% extends 'public/layout.html.twig' %}
 
 {% block content %}
-  <div class="p-3">
-    {% if pager.nbResults is same as(0) %}
-      <p>No animals to display.</p>
-    {% else %}
-      <div class="grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4 flex align-center">
-        {% for animal in pager %}
-          <twig:Public:AnimalCard :animal="animal" />
-        {% endfor %}
-      </div>
-      <div class="flex align-center justify-center">{{ pagerfanta(pager) }}</div>
-    {% endif %}
-  </div>
+	<div class="p-3 bg-tertiary-100">
+		{% if pager.nbResults is same as(0) %}
+			<p>No animals to display.</p>
+		{% else %}
+			<div class="grid gap-6 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4 flex align-center">
+				{% for animal in pager %}
+					<twig:Public:AnimalCard :animal="animal"/>
+				{% endfor %}
+			</div>
+			<div class="flex align-center justify-center">{{ pagerfanta(pager) }}</div>
+		{% endif %}
+	</div>
 {% endblock %}

@@ -24,8 +24,10 @@
 			</div>
 
 			{# Desktop menu #}
-			<div class="max-md:hidden md:flex space-x-6 text-white md:order-2">
-				<a href="#" class="hover:underline">Accueil</a>
+			<div class="max-md:hidden md:flex space-x-6 text-white md:order-2 items-center">
+
+				<twig:Button color="secondary" :route="path('app_animals_list')">Adopt</twig:Button>
+
 				<a href="#" class="hover:underline">À propos</a>
 				<a href="#" class="hover:underline">Services</a>
 				<a href="#" class="hover:underline">Contact</a>
