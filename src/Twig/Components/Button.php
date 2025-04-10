@@ -80,9 +80,9 @@ class Button
     private function computeColorClass(string $color): string
     {
         return match ($color) {
-            'primary' => 'text-primary-50 bg-primary-900 hover:bg-primary-800 focus:ring-primary-500',
-            'secondary' => 'text-secondary-950 bg-secondary-400 hover:bg-secondary-300 focus:ring-secondary-400',
-            'tertiary' => 'text-tertiary-950 bg-tertiary-200 hover:bg-tertiary-300 focus:ring-tertiary-400',
+            'primary' => 'text-white bg-primary-900 hover:bg-primary-950 focus:ring-primary-700',
+            'secondary' => 'text-black bg-secondary-400 hover:bg-secondary-500 focus:ring-secondary-200',
+            'tertiary' => 'text-black bg-tertiary-200 hover:bg-tertiary-300 focus:ring-tertiary-100',
             'primary-outline' => 'text-primary-950 border border-primary-950 hover:bg-primary-50',
             default => throw new \LogicException(sprintf('Unknown button color "%s"', $color)),
         };

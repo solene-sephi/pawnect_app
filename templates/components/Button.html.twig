@@ -1,4 +1,5 @@
-<{{tag}} {% if route %} href="{{ route }}" {% if route starts with 'http' %} rel="noopener" {% endif %} {% endif %} {% if tag == 'button' %} type="{{ type }}" {% endif %} role="button" {{ attributes.without('class') }} {{ attributes.defaults({ class: 'my-2 text-center font-medium focus:outline-none focus:ring-4 rounded-sm ' ~ btnClasses } ) }}>
+<{{tag}} {% if route %} href="{{ route }}" {% if route starts with 'http' %} rel="noopener" {% endif %} {% endif %} {% if tag == 'button' %} type="{{ type }}" {% endif %} role="button" {{ attributes.without('class') }} {{ attributes.defaults({ class: 'border border-black text-center font-medium focus:outline-none focus:ring-2 hover:cursor-pointer rounded-sm ' ~ btnClasses } ) }}>
+
 	{% if iconbefore %}
 		<twig:ux:icon name="{{ iconbefore }}" class="mr-2 {{ iconClasses }}"/>
 	{% endif %}
