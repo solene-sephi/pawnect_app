@@ -52,6 +52,11 @@ class AnimalType
         return $this;
     }
 
+    public function getFormattedName(): string
+    {
+        return ucfirst(strtolower($this->name));
+    }
+
     /**
      * @return Collection<int, AnimalBreed>
      */

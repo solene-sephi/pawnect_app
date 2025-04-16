@@ -1,0 +1,84 @@
+{% extends 'public/layout.html.twig' %}
+{% block content %}
+	<div class="bg-tertiary-100 py-6">
+		<div class="px-4 max-w-screen-lg mx-auto">
+			<div class="sm:grid sm:grid-cols-2 sm:auto-rows-max">
+				<div class="sm:col-start-1 sm:row-start-1 sm:mx-8">
+					<h1 class="text-primary-800 text-center font-extrabold text-3xl sm:text-4xl lg:text-3xl">
+						{{ animal.formattedName }}
+					</h1>
+				</div>
+				<div class="sm:col-start-2 sm:row-span-3 my-4 sm:my-0 sm:mx-8 flex items-center">
+
+					<img class="rounded-sm w-full border border-black my-auto" src="https://placehold.co/600x400" alt="image description"/>
+				</div>
+				<div class="sm:col-start-1 sm:row-start-2 rounded-sm font-medium my-4 sm:mx-8">
+					<div class="flex flex-wrap gap-y-4 gap-x-8 sm:gap-x-10">
+						<div>
+							<p class="text-xs uppercase text-secondary-800">Type</p>
+							<p>{{ animal.breed.type.formattedName }}</p>
+						</div>
+						<div>
+							<p class="text-xs uppercase text-secondary-800">Breed</p>
+							<p>{{ animal.breed.formattedName }}</p>
+						</div>
+						<div>
+							<p class="text-xs uppercase text-secondary-800">Age</p>
+
+							<p>{{ animal.age }}</p>
+						</div>
+						<div>
+							<p class="text-xs uppercase text-secondary-800">Sex</p>
+							<p>{{ animal.sex.getLabel(true) }}</p>
+						</div>
+						<div>
+							<p class="text-xs uppercase text-secondary-800">Current location</p>
+							<p>{{ animal.status.value }}</p>
+						</div>
+						{% if animal.identificationNumber is not null %}
+							<div>
+								<p class="text-xs uppercase text-secondary-800">Identifier</p>
+								<p>{{ animal.identificationNumber }}</p>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+				<div class="sm:col-start-1 sm:row-start-3 my-4 sm:mx-8">
+					<twig:Button color="secondary" isfullwidth>
+						I want to meet
+						{{ animal.name }}
+					</twig:Button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="bg-white py-6">
+		<div class="px-4 max-w-screen-lg mx-auto">
+			<p>ABOUT ME</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+			<p>info</p>
+		</div>
+	</div>
+
+{% endblock %}

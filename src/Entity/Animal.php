@@ -49,8 +49,6 @@ class Animal
     #[Assert\DateTime]
     private ?DateTimeImmutable $dateOfBirth = null;
 
-    private ?int $age = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255)]
     private ?string $identificationNumber = null;
@@ -150,6 +148,11 @@ class Animal
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getFormattedName(): string
+    {
+        return ucfirst(strtolower($this->name));
     }
 
     public function getBreed(): ?AnimalBreed

@@ -2,14 +2,4 @@
   body {
     color: var(--color-black);
   }
-
-  h1 {
-    font-size: var(--text-xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-secondary-800);
-
-    @variant md {
-      font-size: var(--text-2xl);
-    }
-  }
 }

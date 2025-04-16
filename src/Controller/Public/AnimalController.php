@@ -23,7 +23,7 @@ final class AnimalController extends AbstractController
         );
 
         if ($pagerfanta->getNbPages() < $page) {
-            // Redirect to the current routeithout the problamatic parameter, Symfony will use the default $page value (1)
+            // Redirect to the current route without the problamatic parameter, Symfony will use the default $page value (1)
             return $this->redirectToRoute($request->attributes->get('_route'));
         }
 
@@ -44,7 +44,9 @@ final class AnimalController extends AbstractController
             // returns 404
             throw $this->createNotFoundException('The animal does not exist');
         }
-        dump($animal);
-        die;
+
+        return $this->render('public/animal/details.html.twig', [
+            'animal' => $animal,
+        ]);
     }
 }
