@@ -4,7 +4,7 @@
 	<div>{{ form_errors(form) }}</div>
 
 	{% include 'form/shelter_with_address_form.html.twig' with {shelterForm: form, addressForm: form.address} %}
-	<div class="form-button">
+	<div class="form-button mt-4">
 		<twig:Button type="submit" color="secondary">{{ button_label|default('Save') }}</twig:Button>
 	</div>
 	{{ form_end(form) }}

@@ -56,6 +56,11 @@ class AnimalBreed
         return $this;
     }
 
+    public function getFormattedName(): string
+    {
+        return ucfirst(strtolower($this->name));
+    }
+
     public function getType(): ?AnimalType
     {
         return $this->type;
