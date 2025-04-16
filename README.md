@@ -1,8 +1,34 @@
 # Pawnect
 
-A one paragraph description.
+**Pawnect** is a web platform designed to connect animal shelters, foster families, and adopters. It streamlines animal management for organizations and simplifies the adoption process, helping ensure animal welfare through better communication and follow-up.
 
-## Getting Started
+## 🚀 Goals
+
+- Simplify animal management for shelters and foster families.
+- Centralize visit and adoption requests.
+- Automate repetitive admin tasks.
+- Ensure follow-up and tracking of adoptions and foster care.
+- Encourage transparency and interaction between users.
+
+## 📚 Key Features
+
+- User authentication with role management (visitor, foster family, shelter, admin)
+- Animal management (profiles, media, history, filters)
+- Foster family application system + validation workflow
+- Visit request system with calendar availability
+- Internal messaging system and notifications
+- Favorites, adoption feedback, and stories
+- Interactive map with geolocation of shelters
+- Admin panel with statistics and data export
+- Automation of recurring validations
+
+⚠️ The project is under development. Some of the features listed are still in progress.
+
+## 🧰 Tech Stack
+
+For a detailed breakdown of the technologies used in this project, including the frameworks, tools, and libraries, please refer to the [Tech Stack documentation](doc/stack.md).
+
+## 🔧 Getting Started
 
 ### Prerequisities
 
@@ -18,7 +44,7 @@ Before you start, make sure you have the following items installed on your machi
 Clone the repository to your local machine :
 
 ```
-git clone https://github.com/solene-sephi/pawnect.git pawnect
+git clone https://github.com/solene-sephi/pawnect_app.git pawnect
 ```
 
 This will create a folder named pawnect containing the project files.
@@ -60,39 +86,12 @@ docker compose up --pull always -d --wait
 
 The project uses PostgreSQL as the database. Docker automatically creates a database and a default user `app` when launching the containers.
 
-- Environment Variables
-
-Create a `.env.local` file at the root of the project and add the following variables:
-
-```
-POSTGRES_DB=pawnect_db
-```
-
-- Enable Environment Variable Overriding
-  By default, Symfony does not override environment variables. To enable this, modify your `composer.json` file and add:
-
-```
-"extra": {
-    "runtime": {
-        "dotenv_overload": true
-    }
-}
-```
-
-- Rebuild and Restart Docker
-  After updating the environment variables, restart the containers:
-
-```
-docker compose build --no-cache
-docker compose up --pull always -d --wait
-```
-
 #### 6. Check Database Connection
 
-To ensure the database is properly set up, run:
+To manually check if the database is up and running, you can open a psql session inside the container:
 
 ```
-docker compose exec database psql -U app -d pawnect_db
+docker compose exec database psql -U app -d app
 ```
 
 If you can access the database, the setup is correct. Type `\q` to exit.
@@ -102,10 +101,20 @@ If you can access the database, the setup is correct. Type `\q` to exit.
 After setting up the database, apply migrations:
 
 ```
-symfony console doctrine:migrations:migrate
+docker compose exec php bin/console doctrine:migrations:migrate
 ```
 
 This will create the necessary tables for your project.
+
+#### 8. Loading Fixtures
+
+To populate the database with sample data, you can load fixtures:
+
+```
+docker compose exec php bin/console doctrine:fixtures:load
+```
+
+This will insert predefined test data into the database to help you quickly test the application.
 
 #### 9. Running the Project
 
