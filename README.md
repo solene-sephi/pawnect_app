@@ -39,7 +39,7 @@ Before you start, make sure you have the following items installed on your machi
 
 ### Install project
 
-#### 1. Clone the Project
+#### Clone the Project
 
 Clone the repository to your local machine :
 
@@ -49,7 +49,7 @@ git clone https://github.com/solene-sephi/pawnect_app.git pawnect
 
 This will create a folder named pawnect containing the project files.
 
-#### 2. Navigate to the Project Directory
+#### Navigate to the Project Directory
 
 Move into the newly created project folder:
 
@@ -59,7 +59,7 @@ cd pawnect
 
 All further commands should be run from this directory.
 
-#### 3. Build the Docker Images
+#### Build the Docker Images
 
 Build the required Docker images:
 
@@ -69,7 +69,7 @@ docker compose build --no-cache
 
 The `--no-cache` option ensures that all images are rebuilt from scratch, avoiding potential conflicts from old cached versions.
 
-#### 4. Start the Containers
+#### Start the Containers
 
 Start the project and wait for all services to be ready:
 
@@ -82,11 +82,11 @@ docker compose up --pull always -d --wait
 - The `--wait` flag ensures the database and other dependencies are ready before continuing.
   Once the command completes, your Symfony application should be running inside Docker.
 
-#### 5. Configure the Database
+#### Configure the Database
 
 The project uses PostgreSQL as the database. Docker automatically creates a database and a default user `app` when launching the containers.
 
-#### 6. Check Database Connection
+#### Check Database Connection
 
 To manually check if the database is up and running, you can open a psql session inside the container:
 
@@ -96,9 +96,37 @@ docker compose exec database psql -U app -d app
 
 If you can access the database, the setup is correct. Type `\q` to exit.
 
-#### 7. Running Migrations
+### Install Backend Dependencies
 
-After setting up the database, apply migrations:
+Symfony bundles and PHP libraries need to be installed via Composer:
+
+```
+docker compose exec php composer install
+```
+
+### Install Frontend Dependencies
+
+Since built assets are not included in the repository (`/public/build/` is ignored), you need to build them locally to make the application work properly. This is standard practice to avoid committing compiled files to version control during active development.
+
+Install the required Node.js packages:
+
+```
+npm install
+```
+
+### Build the Assets
+
+To compile the assets and make the application display correctly:
+
+```
+npm run build
+```
+
+This will generate all necessary CSS and JS files into the `/public/build/` folder.
+
+#### Running Migrations
+
+Apply migrations:
 
 ```
 docker compose exec php bin/console doctrine:migrations:migrate
@@ -106,7 +134,7 @@ docker compose exec php bin/console doctrine:migrations:migrate
 
 This will create the necessary tables for your project.
 
-#### 8. Loading Fixtures
+#### Loading Fixtures
 
 To populate the database with sample data, you can load fixtures:
 
@@ -116,7 +144,7 @@ docker compose exec php bin/console doctrine:fixtures:load
 
 This will insert predefined test data into the database to help you quickly test the application.
 
-#### 9. Running the Project
+#### Running the Project
 
 The application should now be accessible in the browser at:
 
